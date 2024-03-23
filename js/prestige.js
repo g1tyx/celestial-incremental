@@ -41,6 +41,7 @@
         player.p.prestigePointsToGet = player.p.prestigePointsToGet.mul(player.gh.grasshopperEffects[2])
         player.p.prestigePointsToGet = player.p.prestigePointsToGet.mul(buyableEffect("m", 14))
         player.p.prestigePointsToGet = player.p.prestigePointsToGet.mul(player.cb.commonPetEffects[1][0])
+        player.p.prestigePointsToGet = player.p.prestigePointsToGet.mul(player.d.diceEffects[2])
 
         player.p.prestigePoints = player.p.prestigePoints.add(player.p.prestigePointsToGet.mul(buyableEffect("gh", 14).mul(delta)))
     },

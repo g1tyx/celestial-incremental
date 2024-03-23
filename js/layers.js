@@ -58,6 +58,7 @@ addLayer("i", {
         player.gain = player.gain.mul(buyableEffect("m", 14))
         player.gain = player.gain.mul(player.cb.levelEffect)
         player.gain = player.gain.mul(player.cb.commonPetEffects[0][0])
+        player.gain = player.gain.mul(player.d.diceEffects[0])
 
         player.points = player.points.add(player.gain.mul(delta))
 

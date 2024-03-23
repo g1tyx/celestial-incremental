@@ -90,7 +90,7 @@
             layers.cb.levelup();
         }
 
-        player.cb.levelEffect = player.cb.level.pow(3)
+        player.cb.levelEffect = player.cb.level.pow(3).pow(player.d.dicePointsEffect)
 
         if (player.cb.level.gte(3))
         [
@@ -155,11 +155,11 @@
 
         player.cb.lockedImg = "<img src='resources/secret.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>"
 
-        player.cb.commonPetImage = ["<img src='resources/gwaCommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/eggCommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/unsmithCommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/checkpointCommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/slaxCommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",]
+        player.cb.commonPetImage = ["<img src='resources/gwaCommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/eggCommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/unsmithCommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/checkpointCommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/slaxCommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",]
 
         player.cb.commonPetReq = [
             player.cb.commonPetLevels[0].add(1),
@@ -192,11 +192,11 @@
             "THE WATCHING EYE: " + formatWhole(player.cb.uncommonPetAmounts[4]) + "/" + formatWhole(player.cb.uncommonPetReq[4]) + " to level up. (Currently level " + formatWhole(player.cb.uncommonPetLevels[4]) + ")",
         ]
 
-        player.cb.uncommonPetImage = ["<img src='resources/testeUncommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/starUncommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/normalFaceUncommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/sharkUncommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
-        "<img src='resources/eyeUncommonPet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
+        player.cb.uncommonPetImage = ["<img src='resources/testeUncommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/starUncommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/normalFaceUncommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/sharkUncommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
+        "<img src='resources/eyeUncommonPet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
         ]
 
         player.cb.uncommonPetReq = [
@@ -221,7 +221,7 @@
             "Nova: " + formatWhole(player.cb.rarePetAmounts[0]) + "/" + formatWhole(player.cb.rarePetReq[0]) + " to level up. (Currently level " + formatWhole(player.cb.rarePetLevels[0]) + ")",
         ]
 
-        player.cb.rarePetImage = ["<img src='resources/novaRarePet.png'style='width:calc(120%);height:calc(120%);margin:-20%'></img>",
+        player.cb.rarePetImage = ["<img src='resources/novaRarePet.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>",
         ]
 
         player.cb.rarePetReq = [

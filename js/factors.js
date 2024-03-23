@@ -106,6 +106,7 @@
         player.f.factorPowerPerSecond = player.f.factorPowerPerSecond.mul(player.gh.grasshopperEffects[1])
         player.f.factorPowerPerSecond = player.f.factorPowerPerSecond.mul(buyableEffect("m", 14))
         player.f.factorPowerPerSecond = player.f.factorPowerPerSecond.mul(player.cb.commonPetEffects[2][0])
+        player.f.factorPowerPerSecond = player.f.factorPowerPerSecond.mul(player.d.diceEffects[1])
 
         player.f.factorPower = player.f.factorPower.add(player.f.factorPowerPerSecond.mul(delta))
         player.f.factorPowerEffect = player.f.factorPower.pow(0.5).div(3).add(1)

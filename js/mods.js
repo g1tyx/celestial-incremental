@@ -35,10 +35,12 @@
         if (hasUpgrade("g", 21)) player.m.modsToGet = player.m.modsToGet.mul(upgradeEffect("g", 21))
         player.m.modsToGet = player.m.modsToGet.mul(player.cb.commonPetEffects[2][1])
         if (hasMilestone("r", 19)) player.m.modsToGet = player.m.modsToGet.mul(player.r.pentMilestone30Effect2)
+        player.m.modsToGet = player.m.modsToGet.mul(player.d.diceEffects[8])
 
         player.m.linesOfCodePerSecond = player.m.codeExperience.pow(1.5)
         player.m.linesOfCodePerSecond = player.m.linesOfCodePerSecond.mul(buyableEffect("m", 12))
         player.m.linesOfCodePerSecond = player.m.linesOfCodePerSecond.mul(player.cb.uncommonPetEffects[1][0])
+        player.m.linesOfCodePerSecond = player.m.linesOfCodePerSecond.mul(player.d.diceEffects[9])
 
         if (player.m.mods.gte(player.m.modSoftcapStart))
         {
@@ -67,6 +69,7 @@
         player.m.codeExperienceToGet = player.t.trees.div(1e8).pow(0.3)
         player.m.codeExperienceToGet = player.m.codeExperienceToGet.mul(buyableEffect("m", 11))
         player.m.codeExperienceToGet = player.m.codeExperienceToGet.mul(player.cb.uncommonPetEffects[0][0])
+        player.m.codeExperienceToGet = player.m.codeExperienceToGet.mul(player.d.diceEffects[10])
     },
     branches: ["t"],
     clickables: {

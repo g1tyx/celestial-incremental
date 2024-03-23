@@ -123,6 +123,7 @@
         player.g.grassVal = player.g.grassVal.mul(buyableEffect("f", 7))
         player.g.grassVal = player.g.grassVal.mul(buyableEffect("f", 8))
         player.g.grassVal = player.g.grassVal.mul(player.cb.commonPetEffects[3][0])
+        player.g.grassVal = player.g.grassVal.mul(player.d.diceEffects[5])
 
         player.g.grassReq = new Decimal(4) 
         player.g.grassReq = player.g.grassReq.div(buyableEffect("g", 12))

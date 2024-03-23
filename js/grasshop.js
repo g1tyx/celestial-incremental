@@ -32,6 +32,7 @@
         {
         player.gh.grasshoppersToGet = player.g.grass.div(15000).pow(0.45).add(50000)
         player.gh.grasshoppersToGet = player.gh.grasshoppersToGet.mul(player.cb.uncommonPetEffects[0][1])
+        player.gh.grasshoppersToGet = player.gh.grasshoppersToGet.mul(player.d.diceEffects[6])
     }
 
         if (player.gh.grasshopPause.gt(0)) {
@@ -49,6 +50,7 @@
         player.gh.fertilizerPerSecond = player.gh.grasshoppers.pow(1.4).div(10)
         player.gh.fertilizerPerSecond = player.gh.fertilizerPerSecond.mul(player.cb.uncommonPetEffects[0][2])
         player.gh.fertilizerPerSecond = player.gh.fertilizerPerSecond.mul(player.cb.rarePetEffects[0][0])
+        player.gh.fertilizerPerSecond = player.gh.fertilizerPerSecond.mul(player.d.diceEffects[7])
         player.gh.fertilizer = player.gh.fertilizer.add(player.gh.fertilizerPerSecond.mul(delta))
     },
     branches: ["g"],

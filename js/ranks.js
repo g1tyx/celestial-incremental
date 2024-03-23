@@ -48,7 +48,8 @@
         let ranksGainPostS2 = player.points.div(10).pow(Decimal.div(1, 10)).floor()
 
         player.r.rankEffect = player.r.rank.mul(0.25).add(1).pow(1.05)
-        player.r.rankReq = layers.r.getRankReq().div(player.cb.uncommonPetEffects[3][0])
+        player.r.rankReq = layers.r.getRankReq()
+        if (player.cb.uncommonPetLevels[3].gt(0)) player.r.rankReq = player.r.rankReq.div(player.cb.uncommonPetEffects[3][0])
         if (player.points.gte(player.r.rankReq) && player.r.rank.add(player.r.ranksToGet).lte(20) && hasUpgrade("p", 14))
         {
             player.r.ranksToGet = ranksGainPreS.sub(player.r.rank)
