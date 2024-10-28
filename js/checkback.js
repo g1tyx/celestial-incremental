@@ -5,6 +5,7 @@
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
+        highestLevel: new Decimal(1),
         level: new Decimal(1),
         levelEffect: new Decimal(1),
         xp: new Decimal(0),
@@ -26,13 +27,13 @@
 
         //pets
         lockedImg: "<img src='resources/secret.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
-        petDisplay: ["","","","","","",""],
+        petDisplay: ["","","","","","","","",""],
         petDisplayIndex: new Decimal(0),
 
-        commonPetUnlocks: [false, false, false, false, false, false, false],
-        commonPetLevels: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
-        commonPetAmounts: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
-        commonPetReq: [new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),],
+        commonPetUnlocks: [false, false, false, false, false, false, false, false, false],
+        commonPetLevels: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
+        commonPetAmounts: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
+        commonPetReq: [new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),],
         commonPetImage: ["<img src='resources/gwaCommonPet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
         "<img src='resources/eggCommonPet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
         "<img src='resources/unsmithCommonPet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
@@ -41,38 +42,41 @@
         "<img src='resources/spiderCommonPet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
         "<img src='resources/blobCommonPet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>"],
         commonPetEffects: [[new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),],
-         [new Decimal(1),new Decimal(1)], [new Decimal(1),new Decimal(1)], [new Decimal(1),new Decimal(1)], [new Decimal(1),new Decimal(1)], [new Decimal(1),]],
+         [new Decimal(1),new Decimal(1)], [new Decimal(1),new Decimal(1)], [new Decimal(1),new Decimal(1)], [new Decimal(1),new Decimal(1)], [new Decimal(1),],
+         [new Decimal(1),new Decimal(1),], [new Decimal(1),new Decimal(1),]
+        ],
 
-        uncommonPetDisplay: ["","","","","","","",],
+        uncommonPetDisplay: ["","","","","","","","","",],
         uncommonPetDisplayIndex: new Decimal(0),
 
-        uncommonPetUnlocks: [false, false, false, false, false, false, false],
-        uncommonPetLevels: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0),new Decimal(0), new Decimal(0),],
-        uncommonPetAmounts: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0),new Decimal(0), new Decimal(0),],
-        uncommonPetReq: [new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1),],
+        uncommonPetUnlocks: [false, false, false, false, false, false, false, false, false],
+        uncommonPetLevels: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0),new Decimal(0), new Decimal(0),new Decimal(0), new Decimal(0),],
+        uncommonPetAmounts: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0),new Decimal(0), new Decimal(0),new Decimal(0), new Decimal(0),],
+        uncommonPetReq: [new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1),],
         uncommonPetImage: ["<img src='resources/testeUncommonPet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
         ],
         uncommonPetEffects: [[new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),],
-        [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),]],
+        [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),]
+        , [new Decimal(1), new Decimal(1),new Decimal(1),], [new Decimal(1), new Decimal(1),new Decimal(1),]],
 
-        rarePetDisplay: ["","","","","",],
+        rarePetDisplay: ["","","","","","","",],
         rarePetDisplayIndex: new Decimal(0),
 
-        rarePetUnlocks: [false, false, false, false, false],
-        rarePetLevels: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
-        rarePetAmounts: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
-        rarePetReq: [new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),],
+        rarePetUnlocks: [false, false, false, false, false, false, false],
+        rarePetLevels: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
+        rarePetAmounts: [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
+        rarePetReq: [new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),new Decimal(1),],
         rarePetImage: ["<img src='resources/novaRarePet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
         "<img src='resources/diceRarePet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
         "<img src='resources/ufoRarePet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
         "<img src='resources/goofyAhhThingRarePet.png'style='width:calc(80%);height:calc(80%);margin:10%'></img>",
     ],
-        rarePetEffects: [[new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),]],
+        rarePetEffects: [[new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),], [new Decimal(1), new Decimal(1),]],
 
         petPoints: new Decimal(0),
-        rarePetPointBase: [new Decimal(1),new Decimal(0.1),new Decimal(12),new Decimal(180),new Decimal(4),],
-        rarePetButtonTimersMax: [new Decimal(40), new Decimal(20), new Decimal(600), new Decimal(18000), new Decimal(180)],
-        rarePetButtonTimers: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
+        rarePetPointBase: [new Decimal(1),new Decimal(0.1),new Decimal(12),new Decimal(180),new Decimal(4),new Decimal(25),new Decimal(0.05)],
+        rarePetButtonTimersMax: [new Decimal(40), new Decimal(20), new Decimal(600), new Decimal(18000), new Decimal(180), new Decimal(1000), new Decimal(1)],
+        rarePetButtonTimers: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
 
         lastDicePetRoll: new Decimal(0),
         dicePetRoll: new Decimal(0),
@@ -123,9 +127,9 @@
 
         //cante?
         canteEnergyXPButtonBase: [new Decimal(0.2), new Decimal(0.3), new Decimal(0.5), new Decimal(0.02), new Decimal(1.4), new Decimal(2.5), new Decimal(5), new Decimal(12) ],
-        canteEnergyPetButtonBase: [new Decimal(1.6), new Decimal(3), new Decimal(5.5), new Decimal(9),],
+        canteEnergyPetButtonBase: [new Decimal(1.6), new Decimal(3), new Decimal(5.5), new Decimal(9), new Decimal(13),],
         canteEnergyXPBoostButtonBase: [new Decimal(10), new Decimal(30)],
-        canteEnergyPetPointButtonBase: [new Decimal(0.12), new Decimal(0.05), new Decimal(0.8), new Decimal(7), new Decimal(0.3),],
+        canteEnergyPetPointButtonBase: [new Decimal(0.12), new Decimal(0.05), new Decimal(0.8), new Decimal(7), new Decimal(0.3),new Decimal(1),new Decimal(0.002),],
     }
     },
     automate() {
@@ -137,6 +141,11 @@
     color: "#06366e",
     update(delta) {
         let onepersec = new Decimal(1)
+
+        if (player.cb.level.gte(player.cb.highestLevel))
+        {
+            player.cb.highestLevel = player.cb.level
+        }
 
         if (player.points.gt(1e100) && !inChallenge("ip", 13))
         {
@@ -164,11 +173,11 @@
         if (hasUpgrade("bi", 25) && !player.po.dice) player.cb.levelEffect = player.cb.levelEffect.pow(5)
         if (hasUpgrade("bi", 25) && player.po.dice) player.cb.levelEffect = player.cb.levelEffect.pow(2)
 
-        if (player.cb.level.gte(3))
+        if (player.cb.highestLevel.gte(3))
         [
             player.cb.buttonUnlocks[1] = true
         ]
-        if (player.cb.level.gte(6))
+        if (player.cb.highestLevel.gte(6))
         [
             player.cb.buttonUnlocks[2] = true
         ]
@@ -176,39 +185,39 @@
         [
             player.cb.buttonUnlocks[3] = true
         ]
-        if (player.cb.level.gte(15))
+        if (player.cb.highestLevel.gte(15))
         [
             player.cb.buttonUnlocks[4] = true
         ]
-        if (player.cb.level.gte(25))
+        if (player.cb.highestLevel.gte(25))
         [
             player.cb.petButtonUnlocks[1] = true
         ]
-        if (player.cb.level.gte(50))
+        if (player.cb.highestLevel.gte(50))
         [
             player.cb.buttonUnlocks[5] = true
         ]
-        if (player.cb.level.gte(65))
+        if (player.cb.highestLevel.gte(65))
         [
             player.cb.buttonUnlocks[6] = true
         ]
-        if (player.cb.level.gte(75))
+        if (player.cb.highestLevel.gte(75))
         [
             player.cb.petButtonUnlocks[2] = true
         ]
-        if (player.cb.level.gte(100) && hasUpgrade("ip", 31))
+        if (player.cb.highestLevel.gte(100) && hasUpgrade("ip", 31))
         [
             player.cb.XPBoostUnlock = true
         ]
-        if (player.cb.level.gte(125))
+        if (player.cb.highestLevel.gte(125))
         [
             player.cb.petButtonUnlocks[3] = true
         ]
-        if (player.cb.level.gte(150))
+        if (player.cb.highestLevel.gte(150))
         [
             player.cb.buttonUnlocks[7] = true
         ]
-        if (player.cb.level.gte(666))
+        if (player.cb.highestLevel.gte(666))
         [
             player.cb.XPBoostUnlocks[1] = true
         ]
@@ -256,20 +265,22 @@
             player.cb.buttonTimersMax[i] = player.cb.buttonTimersMax[i].div(player.cb.uncommonPetEffects[1][2])
             player.cb.buttonTimersMax[i] = player.cb.buttonTimersMax[i].div(buyableEffect("ev0", 12))
             if (player.rf.abilityTimers[6].gt(0)) player.cb.buttonTimersMax[i] = player.cb.buttonTimersMax[i].div(1.5)
+            if (hasUpgrade("ev8", 15)) player.cb.buttonTimersMax[i] = player.cb.buttonTimersMax[i].div(1.15)
         }
 
         //Pet
-        if (player.cb.level.gte(10))
+        if (player.cb.highestLevel.gte(10))
         {
             player.cb.petButtonUnlocks[0] = true 
         }
         
-        player.cb.petButtonTimersMax = [new Decimal(900), new Decimal(2700), new Decimal(5400), new Decimal(28800)]
+        player.cb.petButtonTimersMax = [new Decimal(900), new Decimal(2700), new Decimal(5400), new Decimal(28800), new Decimal(43200)]
         for (let i = 0; i < player.cb.petButtonTimersMax.length; i++)
         {
             player.cb.petButtonTimersMax[i] = player.cb.petButtonTimersMax[i].div(player.cb.commonPetEffects[4][0])
             player.cb.petButtonTimersMax[i] = player.cb.petButtonTimersMax[i].div(player.cb.uncommonPetEffects[1][2])
             player.cb.petButtonTimersMax[i] = player.cb.petButtonTimersMax[i].div(buyableEffect("ev0", 13))
+            if (hasUpgrade("ev8", 12)) player.cb.petButtonTimersMax[i] = player.cb.petButtonTimersMax[i].div(1.1)
         }
 
         player.cb.petDisplay = 
@@ -281,6 +292,8 @@
             "Slax: " + formatWhole(player.cb.commonPetAmounts[4]) + "/" + formatWhole(player.cb.commonPetReq[4]) + " to level up (Currently level " + formatWhole(player.cb.commonPetLevels[4]) + ")",
             "Spider: " + formatWhole(player.cb.commonPetAmounts[5]) + "/" + formatWhole(player.cb.commonPetReq[5]) + " to level up (Currently level " + formatWhole(player.cb.commonPetLevels[5]) + ")",
             "Blob: " + formatWhole(player.cb.commonPetAmounts[6]) + "/" + formatWhole(player.cb.commonPetReq[6]) + " to level up (Currently level " + formatWhole(player.cb.commonPetLevels[6]) + ")",
+            "Replicator: " + formatWhole(player.cb.commonPetAmounts[7]) + "/" + formatWhole(player.cb.commonPetReq[7]) + " to level up (Currently level " + formatWhole(player.cb.commonPetLevels[7]) + ")",
+            "Smoke: " + formatWhole(player.cb.commonPetAmounts[8]) + "/" + formatWhole(player.cb.commonPetReq[8]) + " to level up (Currently level " + formatWhole(player.cb.commonPetLevels[8]) + ")",
         ]
 
         player.cb.lockedImg = "<img src='resources/secret.png'style='width:calc(125%);height:calc(125%);margin:-20%'></img>"
@@ -292,6 +305,8 @@
         "<img src='resources/slaxCommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
         "<img src='resources/spiderCommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
         "<img src='resources/blobCommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
+        "<img src='resources/replicatorCommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
+        "<img src='resources/smokeCommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
     ]
 
         if (player.cb.viewingEvolved[0]) 
@@ -308,6 +323,8 @@
             player.cb.commonPetLevels[4].add(1).pow(1.15).floor(),
             player.cb.commonPetLevels[5].add(1).pow(1.18).floor(),
             player.cb.commonPetLevels[6].add(1).pow(1.18).floor(),
+            player.cb.commonPetLevels[7].add(1).pow(1.2).floor(),
+            player.cb.commonPetLevels[8].add(1).pow(1.2).floor(),
         ]
 
 
@@ -326,6 +343,8 @@
             [player.cb.commonPetLevels[4].mul(0.01).add(1), player.cb.commonPetLevels[4].mul(0.02).add(1),],
             [player.cb.commonPetLevels[5].pow(1.6).mul(0.5).add(1), player.cb.commonPetLevels[5].pow(1.6).mul(0.5).add(1),], //antimatter and 7th dim
             [player.cb.commonPetLevels[6].mul(0.01).add(1), ], //xpboost
+            [player.cb.commonPetLevels[7].mul(0.1).add(1), player.cb.commonPetLevels[7].pow(1.05).mul(0.2).add(1),], //replicanti mult and galaxy dust
+            [player.cb.commonPetLevels[8].pow(1.2).mul(0.7).add(1), player.cb.commonPetLevels[5].pow(1.8).mul(1.2).add(1),], //mastery and all hex points
 
         ]
         }
@@ -350,6 +369,8 @@
             "THE WATCHING EYE: " + formatWhole(player.cb.uncommonPetAmounts[4]) + "/" + formatWhole(player.cb.uncommonPetReq[4]) + " to level up. (Currently level " + formatWhole(player.cb.uncommonPetLevels[4]) + ")",
             "Clock: " + formatWhole(player.cb.uncommonPetAmounts[5]) + "/" + formatWhole(player.cb.uncommonPetReq[5]) + " to level up. (Currently level " + formatWhole(player.cb.uncommonPetLevels[5]) + ")",
             "Trollface: " + formatWhole(player.cb.uncommonPetAmounts[6]) + "/" + formatWhole(player.cb.uncommonPetReq[6]) + " to level up. (Currently level " + formatWhole(player.cb.uncommonPetLevels[6]) + ")",
+            "Infinity Breaker: " + formatWhole(player.cb.uncommonPetAmounts[7]) + "/" + formatWhole(player.cb.uncommonPetReq[7]) + " to level up. (Currently level " + formatWhole(player.cb.uncommonPetLevels[7]) + ")",
+            "John: " + formatWhole(player.cb.uncommonPetAmounts[8]) + "/" + formatWhole(player.cb.uncommonPetReq[8]) + " to level up. (Currently level " + formatWhole(player.cb.uncommonPetLevels[8]) + ")",
         ]
 
         player.cb.uncommonPetImage = ["<img src='resources/testeUncommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
@@ -359,6 +380,8 @@
         "<img src='resources/eyeUncommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
         "<img src='resources/clockUncommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
         "<img src='resources/trollUncommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
+        "<img src='resources/infinityBreakerUncommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
+        "<img src='resources/johnUncommonPet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
     ]
 
         player.cb.uncommonPetReq = [
@@ -369,6 +392,8 @@
             player.cb.uncommonPetLevels[4].mul(2.2).add(1).floor(),
             player.cb.uncommonPetLevels[5].mul(1.6).add(1).floor(),
             player.cb.uncommonPetLevels[6].mul(1.6).add(1).floor(),
+            player.cb.uncommonPetLevels[7].mul(1.8).add(1).floor(),
+            player.cb.uncommonPetLevels[8].mul(1.8).add(1).floor(),
         ]
 
         if (((player.points.gte(1e100) && !inChallenge("ip", 13)) || hasMilestone("ip", 24)) || (hasUpgrade("de", 13) && inChallenge("tad", 11)))
@@ -381,6 +406,10 @@
             [player.cb.uncommonPetLevels[4].mul(0.05).add(1),], //check back xp
             [player.cb.uncommonPetLevels[5].mul(0.2).add(1),player.cb.uncommonPetLevels[5].mul(0.2).add(1),player.cb.uncommonPetLevels[5].mul(0.2).add(1),], //1st, 3rd, 5th
             [player.cb.uncommonPetLevels[6].mul(0.2).add(1),player.cb.uncommonPetLevels[6].mul(0.2).add(1),player.cb.uncommonPetLevels[6].mul(0.2).add(1),], //2nd, 4th, 6th
+            [player.cb.uncommonPetLevels[7].pow(1.25).mul(0.7).add(1),player.cb.uncommonPetLevels[7].pow(1.8).mul(3).add(1),player.cb.uncommonPetLevels[7].pow(1.2).add(1),], //inf dims, neg ip, broken inf
+            [player.cb.uncommonPetLevels[8].pow(1.3).mul(0.4).add(1),player.cb.uncommonPetLevels[8].pow(1.1).mul(0.5).add(1),player.cb.uncommonPetLevels[8].pow(1.2).add(1),], //dim power, alternate broken inf, time cubes
+
+            //WORK HERE
         ]
         }
         else
@@ -402,6 +431,8 @@
             "Drippy Ufo: " + formatWhole(player.cb.rarePetAmounts[2]) + "/" + formatWhole(player.cb.rarePetReq[2]) + " to level up. (Currently level " + formatWhole(player.cb.rarePetLevels[2]) + ")",
             "Goofy Ahh Thing: " + formatWhole(player.cb.rarePetAmounts[3]) + "/" + formatWhole(player.cb.rarePetReq[3]) + " to level up. (Currently level " + formatWhole(player.cb.rarePetLevels[3]) + ")",
             "Antimatter: " + formatWhole(player.cb.rarePetAmounts[4]) + "/" + formatWhole(player.cb.rarePetReq[4]) + " to level up. (Currently level " + formatWhole(player.cb.rarePetLevels[4]) + ")",
+            "Hex Shadow: " + formatWhole(player.cb.rarePetAmounts[5]) + "/" + formatWhole(player.cb.rarePetReq[5]) + " to level up. (Currently level " + formatWhole(player.cb.rarePetLevels[5]) + ")",
+            "Grass Square: " + formatWhole(player.cb.rarePetAmounts[6]) + "/" + formatWhole(player.cb.rarePetReq[6]) + " to level up. (Currently level " + formatWhole(player.cb.rarePetLevels[6]) + ")",
         ]
 
         player.cb.rarePetImage = [
@@ -410,6 +441,8 @@
             "<img src='resources/ufoRarePet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
             "<img src='resources/goofyAhhThingRarePet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
             "<img src='resources/antimatterRarePet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
+            "<img src='resources/hexShadowRarePet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
+            "<img src='resources/grassSquareRarePet.png'style='width:calc(115%);height:calc(115%);margin:-20%'></img>",
         ]
 
         player.cb.rarePetReq = [
@@ -418,6 +451,8 @@
             player.cb.rarePetLevels[2].pow(1.4).add(1).floor(),
             player.cb.rarePetLevels[3].pow(1.2).add(1).floor(),
             player.cb.rarePetLevels[4].pow(1.25).add(1).floor(),
+            player.cb.rarePetLevels[5].pow(1.3).add(1).floor(),
+            player.cb.rarePetLevels[6].pow(1.3).add(1).floor(),
         ]
 
         if (((player.points.gte(1e100) && !inChallenge("ip", 13)) || hasMilestone("ip", 24)) || (hasUpgrade("de", 13) && inChallenge("tad", 11)))
@@ -428,6 +463,8 @@
             [player.cb.petPoints.pow(0.7).mul(0.1).add(1).pow(player.cb.rarePetLevels[2].pow(0.25)), player.cb.rarePetLevels[2].mul(0.04).add(1)], //Rocket Fuel based on pet points, Golden grass spawn time
             [player.cb.evolutionShards.pow(0.85).mul(0.6).add(1).pow(player.cb.rarePetLevels[3].pow(0.3)), player.cb.rarePetLevels[3].mul(0.03).add(1)], //Grasshoppers based on evo shards, Level Req
             [player.in.infinities.pow(0.55).mul(0.1).add(1).pow(player.cb.rarePetLevels[4].pow(0.25)), player.cb.rarePetLevels[4].pow(1.1).add(1)], //Antimatter dimensions based on infinities, golden grass
+            [player.h.ragePower.pow(1.2).mul(0.3).add(1).pow(player.cb.rarePetLevels[5].pow(0.4)), player.h.ragePower.pow(1.01).mul(0.2).add(1).pow(player.cb.rarePetLevels[5].pow(0.3))], //steel and crystal based on rage power
+            [player.g.goldGrass.pow(0.1).mul(0.01).add(1).pow(player.cb.rarePetLevels[6].pow(0.2)), player.g.goldGrass.pow(0.12).mul(0.015).add(1).pow(player.cb.rarePetLevels[6].pow(0.25))], //Blank mods and rage power based on golden grass
         ]
         }
         else
@@ -441,7 +478,7 @@
             } 
         }   
 
-        player.cb.rarePetButtonTimersMax = [new Decimal(40), new Decimal(20), new Decimal(900), new Decimal(18000), new Decimal(180)]
+        player.cb.rarePetButtonTimersMax = [new Decimal(40), new Decimal(20), new Decimal(900), new Decimal(18000), new Decimal(180), new Decimal(1500), new Decimal(1)]
         for (let i = 0; i < player.cb.rarePetButtonTimersMax.length; i++)
         {
             player.cb.rarePetButtonTimersMax[i] = player.cb.rarePetButtonTimersMax[i].div(buyableEffect("ev0", 14))
@@ -452,17 +489,20 @@
             player.cb.rarePetButtonTimers[i] = player.cb.rarePetButtonTimers[i].sub(onepersec.mul(delta))
         }
 
-        player.cb.rarePetPointBase = [new Decimal(2), new Decimal(0.25), new Decimal(12), new Decimal(100), new Decimal(4)]
+        player.cb.rarePetPointBase = [new Decimal(2), new Decimal(0.25), new Decimal(12), new Decimal(100), new Decimal(4), new Decimal(25), new Decimal(0.05)]
         for (let i = 0; i < player.cb.rarePetPointBase.length; i++)
         {
             player.cb.rarePetPointBase[i] = player.cb.rarePetPointBase[i].mul(player.cb.evolvedEffects[1][1])
             player.cb.rarePetPointBase[i] = player.cb.rarePetPointBase[i].mul(buyableEffect("cb", 14))
+            if (hasUpgrade("ev8", 13)) player.cb.rarePetPointBase[i] = player.cb.rarePetPointBase[i].mul(1.2)
         }
         player.cb.rarePetPointBase[0] = player.cb.rarePetPointBase[0].mul(player.cb.rarePetLevels[0].mul(0.5))
         player.cb.rarePetPointBase[1] = player.cb.rarePetPointBase[1].mul(player.cb.rarePetLevels[1].mul(0.5))
         player.cb.rarePetPointBase[2] = player.cb.rarePetPointBase[2].mul(player.cb.rarePetLevels[2].mul(0.5).add(1))
         player.cb.rarePetPointBase[3] = player.cb.rarePetPointBase[3].mul(player.cb.rarePetLevels[3].mul(0.1).add(1))
         player.cb.rarePetPointBase[4] = player.cb.rarePetPointBase[4].mul(player.cb.rarePetLevels[4].mul(0.6).add(1))
+        player.cb.rarePetPointBase[5] = player.cb.rarePetPointBase[5].mul(player.cb.rarePetLevels[5].mul(0.3).add(1))
+        player.cb.rarePetPointBase[6] = player.cb.rarePetPointBase[6].mul(player.cb.rarePetLevels[6].mul(0.2).add(1))
 
         if (player.cb.dicePetCombo > player.cb.highestDicePetCombo)
         {
@@ -547,6 +587,7 @@
             player.cb.XPBoostBase[i] = player.cb.XPBoostBase[i].mul(player.cb.evolvedEffects[2][1])
             player.cb.XPBoostBase[i] = player.cb.XPBoostBase[i].mul(player.cb.commonPetEffects[6][0])
             player.cb.XPBoostBase[i] = player.cb.XPBoostBase[i].mul(buyableEffect("cb", 13))
+            if (hasUpgrade("ev8", 16)) player.cb.XPBoostBase[i] = player.cb.XPBoostBase[i].mul(1.2)
         }
 
         player.cb.XPBoostReq = [new Decimal(100), new Decimal(500)]
@@ -604,7 +645,7 @@
         player.cb.canteEnergyXPButtonBase = [new Decimal(0.2), new Decimal(0.3), new Decimal(0.5), new Decimal(0.02), new Decimal(1.4), new Decimal(2.5), new Decimal(5), new Decimal(12) ]
         player.cb.canteEnergyPetButtonBase = [new Decimal(1.6), new Decimal(3), new Decimal(5.5), new Decimal(9),]
         player.cb.canteEnergyXPBoostButtonBase = [new Decimal(10), new Decimal(30)]
-        player.cb.canteEnergyPetPointButtonBase = [new Decimal(0.12), new Decimal(0.05), new Decimal(0.8), new Decimal(7), new Decimal(0.3),]
+        player.cb.canteEnergyPetPointButtonBase = [new Decimal(0.12), new Decimal(0.05), new Decimal(0.8), new Decimal(7), new Decimal(0.3),new Decimal(1),new Decimal(0.002),]
     },
     levelup()
     {
@@ -696,12 +737,12 @@
             title() { return player.cb.buttonTimers[0].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[0]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[0].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[0].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[0] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 0.5%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 0.5%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[0].mul(player.cb.xpMult))
                 player.cb.buttonTimers[0] = player.cb.buttonTimersMax[0]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(200)
                     if (random == 1)
@@ -718,12 +759,12 @@
             title() { return player.cb.buttonTimers[1].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[1]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[1].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[1].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[1] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 1%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 1%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[1].mul(player.cb.xpMult))
                 player.cb.buttonTimers[1] = player.cb.buttonTimersMax[1]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(100)
                     if (random == 1)
@@ -740,12 +781,12 @@
             title() { return player.cb.buttonTimers[2].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[2]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[2].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[2].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[2] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 2%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 2%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[2].mul(player.cb.xpMult))
                 player.cb.buttonTimers[2] = player.cb.buttonTimersMax[2]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(50)
                     if (random == 1)
@@ -762,12 +803,12 @@
             title() { return player.cb.buttonTimers[3].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[3]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[3].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[3].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[3] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 0.2%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 0.2%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[3].mul(player.cb.xpMult))
                 player.cb.buttonTimers[3] = player.cb.buttonTimersMax[3]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(500)
                     if (random == 1)
@@ -796,12 +837,12 @@
             title() { return player.cb.buttonTimers[4].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[4]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[4].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[4].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[4] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 5%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 5%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[4].mul(player.cb.xpMult))
                 player.cb.buttonTimers[4] = player.cb.buttonTimersMax[4]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(20)
                     if (random == 1)
@@ -866,12 +907,12 @@
             title() { return player.cb.buttonTimers[5].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[5]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[5].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[5].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[5] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 20%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 20%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[5].mul(player.cb.xpMult))
                 player.cb.buttonTimers[5] = player.cb.buttonTimersMax[5]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(5)
                     if (random == 1)
@@ -901,12 +942,12 @@
             title() { return player.cb.buttonTimers[6].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[6]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[6].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[6].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[6] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 50%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 50%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[6].mul(player.cb.xpMult))
                 player.cb.buttonTimers[6] = player.cb.buttonTimersMax[6]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(2)
                     if (random == 1)
@@ -922,7 +963,7 @@
         24: {
             title() { return player.cb.rarePetButtonTimers[3].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.rarePetButtonTimers[3]) + "." : "<h3>+" + format(player.cb.rarePetPointBase[3]) + " Pet Points."},
             canClick() { return player.cb.rarePetButtonTimers[3].lt(0) },
-            tooltip() { return "25% chance for an evo shard"},
+            tooltip() { return "25% chance for an evo shard."},
             unlocked() { return player.cb.rarePetDisplayIndex == 3 },
             onClick() {
                 player.cb.petPoints = player.cb.petPoints.add(player.cb.rarePetPointBase[3])
@@ -954,14 +995,14 @@
             title() { return player.cb.XPBoostTimers[0].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.XPBoostTimers[0]) + "." : "<h3>+" + format(player.cb.XPBoostBase[0]) + " XP Boost."},
             canClick() { return player.cb.XPBoostTimers[0].lt(0) },
             unlocked() { return player.cb.XPBoostUnlocks[0] },
-            tooltip() { return player.cb.level.gte(250) ? "Paragon Shard Rarity: 5%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(250) ? "Paragon Shard Rarity: 5%" : ""},
             onClick() {
-                if (player.cb.level.gte(player.cb.XPBoostReq[0]))
+                if (player.cb.highestLevel.gte(player.cb.XPBoostReq[0]))
                 {
                     player.cb.XPBoost = player.cb.XPBoost.add(player.cb.XPBoostBase[0])
                     player.cb.XPBoostTimers[0] = player.cb.XPBoostTimersMax[0]
     
-                    if (player.cb.level.gt(250))
+                    if (player.cb.highestLevel.gt(250))
                     {
                         let random = getRandomInt(20)
                         if (random == 1)
@@ -1010,12 +1051,12 @@
             title() { return player.cb.buttonTimers[7].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.buttonTimers[7]) + "." : "<h3>+" + format(player.cb.buttonBaseXP[7].mul(player.cb.xpMult)) + " XP."},
             canClick() { return player.cb.buttonTimers[7].lt(0) },
             unlocked() { return player.cb.buttonUnlocks[7] },
-            tooltip() { return player.cb.level.gte(35) ? "Evo Shard Rarity: 98%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(35) ? "Evo Shard Rarity: 98%" : ""},
             onClick() {
                 player.cb.xp = player.cb.xp.add(player.cb.buttonBaseXP[7].mul(player.cb.xpMult))
                 player.cb.buttonTimers[7] = player.cb.buttonTimersMax[7]
 
-                if (player.cb.level.gt(35))
+                if (player.cb.highestLevel.gt(35))
                 {
                     let random = getRandomInt(50)
                     if (random != 1)
@@ -1035,14 +1076,14 @@
             title() { return player.cb.XPBoostTimers[1].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.XPBoostTimers[1]) + "." : "<h3>+" + format(player.cb.XPBoostBase[1]) + " XP Boost."},
             canClick() { return player.cb.XPBoostTimers[1].lt(0) },
             unlocked() { return player.cb.XPBoostUnlocks[1] },
-            tooltip() { return player.cb.level.gte(250) ? "Paragon Shard Rarity: 20%" : ""},
+            tooltip() { return player.cb.highestLevel.gte(250) ? "Paragon Shard Rarity: 20%" : ""},
             onClick() {
-                if (player.cb.level.gte(player.cb.XPBoostReq[1]))
+                if (player.cb.highestLevel.gte(player.cb.XPBoostReq[1]))
                 {
                     player.cb.XPBoost = player.cb.XPBoost.add(player.cb.XPBoostBase[1])
                     player.cb.XPBoostTimers[1] = player.cb.XPBoostTimersMax[1]
     
-                    if (player.cb.level.gt(250))
+                    if (player.cb.highestLevel.gt(250))
                     {
                         let random = getRandomInt(5)
                         if (random == 1)
@@ -1060,6 +1101,42 @@
                 }
             },
             style: { width: '200px', "min-height": '50px', 'border-radius': "30%" },
+        },
+        32: {
+            title() { return player.cb.rarePetButtonTimers[5].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.rarePetButtonTimers[5]) + "." : "<h3>+" + format(player.cb.rarePetPointBase[5]) + " Pet Points."},
+            canClick() { return player.cb.rarePetButtonTimers[5].lt(0) },
+            tooltip() { return "2% chance for an paragon shard."},
+            unlocked() { return player.cb.rarePetDisplayIndex == 5 },
+            onClick() {
+                player.cb.petPoints = player.cb.petPoints.add(player.cb.rarePetPointBase[5])
+                player.cb.rarePetButtonTimers[5] = player.cb.rarePetButtonTimersMax[5]
+                if (player.ca.unlockedCante) player.ca.canteEnergy = player.ca.canteEnergy.add(player.cb.canteEnergyPetPointButtonBase[5].mul(player.ca.canteEnergyMult))
+
+                if (player.cb.highestLevel.gt(250))
+                {
+                    let random = getRandomInt(50)
+                    if (random == 1)
+                    {
+                        player.cb.paragonShards = player.cb.paragonShards.add(1);
+                        callAlert("You gained a PARAGON SHARD! (2%)", "resources/paragonShard.png");
+                    }
+                }
+            },
+            style: { width: '200px', "min-height": '50px', 'border-radius': "0%" },
+        },
+        33: {
+            title() { return player.cb.rarePetButtonTimers[6].gt(0) ? "<h3>Check back in <br>" + formatTime(player.cb.rarePetButtonTimers[6]) + "." : "<h3>+" + format(player.cb.rarePetPointBase[6]) + " Pet Points."},
+            canClick() { return player.cb.rarePetButtonTimers[6].lt(0) },
+            tooltip() { return "+200% of golden grass value on claim.<br>(You have " + format(player.g.goldGrass) + " golden grass)"},
+            unlocked() { return player.cb.rarePetDisplayIndex == 6 },
+            onClick() {
+                player.cb.petPoints = player.cb.petPoints.add(player.cb.rarePetPointBase[6])
+                player.cb.rarePetButtonTimers[6] = player.cb.rarePetButtonTimersMax[6]
+                if (player.ca.unlockedCante) player.ca.canteEnergy = player.ca.canteEnergy.add(player.cb.canteEnergyPetPointButtonBase[6].mul(player.ca.canteEnergyMult))
+
+                player.g.goldGrass = player.g.goldGrass.add(player.g.goldGrassVal.mul(2))
+            },
+            style: { width: '200px', "min-height": '50px', 'border-radius': "0%" },
         },
         //PETS
         101: {
@@ -1449,6 +1526,126 @@
         onClick() {
             player.cb.rarePetAmounts[4] = player.cb.rarePetAmounts[4].sub(player.cb.rarePetReq[4])
             player.cb.rarePetLevels[4] = player.cb.rarePetLevels[4].add(1)
+        },
+        style: { width: '100px', "min-height": '50px', 'border-radius': "0%" },
+    },
+    144: {
+        title() { return player.cb.commonPetAmounts[7].gt(0) || player.cb.commonPetLevels[7].gt(0) ? player.cb.commonPetImage[7] : player.cb.lockedImg},
+        canClick() { return player.cb.commonPetAmounts[7].gt(0) || player.cb.commonPetLevels[7].gt(0) },
+        unlocked() { return true },
+        tooltip() { return player.cb.commonPetAmounts[7].gt(0) || player.cb.commonPetLevels[7].gt(0) ? "<h3>x" + format(player.cb.commonPetEffects[7][0]) + " to replicanti mult.<br>x" + format(player.cb.commonPetEffects[7][1]) + " to all galaxy dust.": ""},
+        onClick() {
+            player.cb.petDisplayIndex = new Decimal(7)
+        },
+        style: { width: '100px', "min-height": '100px', 'border-radius': "0%", 'background-color': "#021124" },
+    },
+    145: {
+        title() { return "Level Up"},
+        canClick() { return player.cb.commonPetAmounts[7].gte(player.cb.commonPetReq[7]) },
+        unlocked() { return player.cb.petDisplayIndex == 7 },
+        onClick() {
+            player.cb.commonPetAmounts[7] = player.cb.commonPetAmounts[7].sub(player.cb.commonPetReq[7])
+            player.cb.commonPetLevels[7] = player.cb.commonPetLevels[7].add(1)
+        },
+        style: { width: '100px', "min-height": '50px', 'border-radius': "0%" },
+    },
+    146: {
+        title() { return player.cb.commonPetAmounts[8].gt(0) || player.cb.commonPetLevels[8].gt(0) ? player.cb.commonPetImage[8] : player.cb.lockedImg},
+        canClick() { return player.cb.commonPetAmounts[8].gt(0) || player.cb.commonPetLevels[8].gt(0) },
+        unlocked() { return true },
+        tooltip() { return player.cb.commonPetAmounts[8].gt(0) || player.cb.commonPetLevels[8].gt(0) ? "<h3>x" + format(player.cb.commonPetEffects[8][0]) + " to all mastery points.<br>x" + format(player.cb.commonPetEffects[8][1]) + " to all hex points.": ""},
+        onClick() {
+            player.cb.petDisplayIndex = new Decimal(8)
+        },
+        style: { width: '100px', "min-height": '100px', 'border-radius': "0%", 'background-color': "#021124" },
+    },
+    147: {
+        title() { return "Level Up"},
+        canClick() { return player.cb.commonPetAmounts[8].gte(player.cb.commonPetReq[8]) },
+        unlocked() { return player.cb.petDisplayIndex == 8 },
+        onClick() {
+            player.cb.commonPetAmounts[8] = player.cb.commonPetAmounts[8].sub(player.cb.commonPetReq[8])
+            player.cb.commonPetLevels[8] = player.cb.commonPetLevels[8].add(1)
+        },
+        style: { width: '100px', "min-height": '50px', 'border-radius': "0%" },
+    },
+    148: {
+        title() { return player.cb.uncommonPetAmounts[7].gt(0) || player.cb.uncommonPetLevels[7].gt(0) ? player.cb.uncommonPetImage[7] : player.cb.lockedImg},
+        canClick() { return player.cb.uncommonPetAmounts[7].gt(0) || player.cb.uncommonPetLevels[7].gt(0) },
+        unlocked() { return true },
+        tooltip() { return player.cb.uncommonPetAmounts[7].gt(0) || player.cb.uncommonPetLevels[7].gt(0) ? "<h3>x" + format(player.cb.uncommonPetEffects[7][0]) + " to infinity dimensions.<br>x" + format(player.cb.uncommonPetEffects[7][1]) + " to negative infinity points.<br>x" + format(player.cb.uncommonPetEffects[7][2]) + " to broken infinities.": ""},
+        onClick() {
+            player.cb.uncommonPetDisplayIndex = new Decimal(7)
+        },
+        style: { width: '100px', "min-height": '100px', 'border-radius': "0%", 'background-color': "#021124" },
+    },
+    149: {
+        title() { return "Level Up"},
+        canClick() { return player.cb.uncommonPetAmounts[7].gte(player.cb.uncommonPetReq[7]) },
+        unlocked() { return player.cb.uncommonPetDisplayIndex == 7 },
+        onClick() {
+            player.cb.uncommonPetAmounts[7] = player.cb.uncommonPetAmounts[7].sub(player.cb.uncommonPetReq[7])
+            player.cb.uncommonPetLevels[7] = player.cb.uncommonPetLevels[7].add(1)
+        },
+        style: { width: '100px', "min-height": '50px', 'border-radius': "0%" },
+    },
+    151: {
+        title() { return player.cb.uncommonPetAmounts[8].gt(0) || player.cb.uncommonPetLevels[8].gt(0) ? player.cb.uncommonPetImage[8] : player.cb.lockedImg},
+        canClick() { return player.cb.uncommonPetAmounts[8].gt(0) || player.cb.uncommonPetLevels[8].gt(0) },
+        unlocked() { return true },
+        tooltip() { return player.cb.uncommonPetAmounts[8].gt(0) || player.cb.uncommonPetLevels[8].gt(0) ? "<h3>x" + format(player.cb.uncommonPetEffects[8][0]) + " to dimension power.<br>x" + format(player.cb.uncommonPetEffects[8][1]) + " to alternate broken infinities.<br>x" + format(player.cb.uncommonPetEffects[8][2]) + " to time cubes.": ""},
+        onClick() {
+            player.cb.uncommonPetDisplayIndex = new Decimal(8)
+        },
+        style: { width: '100px', "min-height": '100px', 'border-radius': "0%", 'background-color': "#021124" },
+    },
+    152: {
+        title() { return "Level Up"},
+        canClick() { return player.cb.uncommonPetAmounts[8].gte(player.cb.uncommonPetReq[8]) },
+        unlocked() { return player.cb.uncommonPetDisplayIndex == 8 },
+        onClick() {
+            player.cb.uncommonPetAmounts[8] = player.cb.uncommonPetAmounts[8].sub(player.cb.uncommonPetReq[8])
+            player.cb.uncommonPetLevels[8] = player.cb.uncommonPetLevels[8].add(1)
+        },
+        style: { width: '100px', "min-height": '50px', 'border-radius': "0%" },
+    },
+    153: {
+        title() { return player.cb.rarePetAmounts[5].gt(0) || player.cb.rarePetLevels[5].gt(0) ? player.cb.rarePetImage[5] : player.cb.lockedImg},
+        canClick() { return player.cb.rarePetAmounts[5].gt(0) || player.cb.rarePetLevels[5].gt(0) },
+        unlocked() { return true },
+        tooltip() { return player.cb.rarePetAmounts[5].gt(0) || player.cb.rarePetLevels[5].gt(0) ? "<h3>x" + format(player.cb.rarePetEffects[5][0]) + " to steel (based on rage power).<br>x" + format(player.cb.rarePetEffects[5][1]) + " to crystals (based on rage power).": ""},
+        onClick() {
+            player.cb.rarePetDisplayIndex = new Decimal(5)
+        },
+        style: { width: '100px', "min-height": '100px', 'border-radius': "0%", 'background-color': "#021124" },
+    },
+    154: {
+        title() { return "Level Up"},
+        canClick() { return player.cb.rarePetAmounts[5].gte(player.cb.rarePetReq[5]) },
+        unlocked() { return player.cb.rarePetDisplayIndex == 5 },
+        onClick() {
+            player.cb.rarePetAmounts[5] = player.cb.rarePetAmounts[5].sub(player.cb.rarePetReq[5])
+            player.cb.rarePetLevels[5] = player.cb.rarePetLevels[5].add(1)
+        },
+        style: { width: '100px', "min-height": '50px', 'border-radius': "0%" },
+    },
+    155: {
+        title() { return player.cb.rarePetAmounts[6].gt(0) || player.cb.rarePetLevels[6].gt(0) ? player.cb.rarePetImage[6] : player.cb.lockedImg},
+        canClick() { return player.cb.rarePetAmounts[6].gt(0) || player.cb.rarePetLevels[6].gt(0) },
+        unlocked() { return true },
+        tooltip() { return player.cb.rarePetAmounts[6].gt(0) || player.cb.rarePetLevels[6].gt(0) ? "<h3>x" + format(player.cb.rarePetEffects[6][0]) + " to blank mods (based on golden grass).<br>x" + format(player.cb.rarePetEffects[6][1]) + " to rage power (based on golden grass).": ""},
+        onClick() {
+            player.cb.rarePetDisplayIndex = new Decimal(6)
+        },
+        style: { width: '100px', "min-height": '100px', 'border-radius': "0%", 'background-color': "#021124" },
+    },
+    156: {
+        title() { return "Level Up"},
+        canClick() { return player.cb.rarePetAmounts[6].gte(player.cb.rarePetReq[6]) },
+        unlocked() { return player.cb.rarePetDisplayIndex == 6 },
+        onClick() {
+            player.cb.rarePetAmounts[6] = player.cb.rarePetAmounts[6].sub(player.cb.rarePetReq[6])
+            player.cb.rarePetLevels[6] = player.cb.rarePetLevels[6].add(1)
         },
         style: { width: '100px', "min-height": '50px', 'border-radius': "0%" },
     },
@@ -2202,6 +2399,42 @@
             unlocked() { return player.cb.petDisplayIndex == 0 },
             
         },
+        eggGuy: {
+            title: "Egg Guy",
+            body() { return "This fellow came out of a very powerful chicken... However he would meet his fate when the chicken inside hatches..." },
+            unlocked() { return player.cb.petDisplayIndex == 1 },
+            
+        },
+        unsmith: {
+            title: "Unsmith",
+            body() { return "A creature that was synergized out of the purest form of SPV, which we don't know what it is yet... We will figure it out one day." },
+            unlocked() { return player.cb.petDisplayIndex == 2 },
+            
+        },
+        gdCheckpoint: {
+            title: "Gd Checkpoint",
+            body() { return "This guy feels a little bit familiar, but you don't know why. You just ignore it." },
+            unlocked() { return player.cb.petDisplayIndex == 3 },
+            
+        },
+        slax: {
+            title: "Slax",
+            body() { return "A being of neon green and plasma. The energy of the void radiates within it's presence." },
+            unlocked() { return player.cb.petDisplayIndex == 4 },
+            
+        },
+        spider: {
+            title: "Spider",
+            body() { return "This eight-legged bug has no place in these worlds, but a small crack in the fabric of reality made it slip through and gain enough power to be your pet." },
+            unlocked() { return player.cb.petDisplayIndex == 5 },
+            
+        },
+        blob: {
+            title: "Blob",
+            body() { return "Blob." },
+            unlocked() { return player.cb.petDisplayIndex == 6 },
+            
+        },
     },
     microtabs: {
         stuff: {
@@ -2215,7 +2448,7 @@
             },
             "Pets": {
                 buttonStyle() { return { 'color': '#06366e' } },
-                unlocked() { return player.cb.level.gte(10) || player.cb.XPBoostUnlock },
+                unlocked() { return player.cb.highestLevel.gte(10) || player.cb.XPBoostUnlock },
                 content:
                 [
                     ["microtabs", "pets", { 'border-width': '0px' }],
@@ -2223,7 +2456,7 @@
             },
             "Evolution": {
                 buttonStyle() { return { 'color': '#1500bf', 'border-color': "#1500bf", 'background-image': 'linear-gradient(90deg, #d487fd, #4b79ff)',} },
-                unlocked() { return player.cb.level.gte(35)|| player.cb.XPBoostUnlock  },
+                unlocked() { return player.cb.highestLevel.gte(35)|| player.cb.XPBoostUnlock  },
                 content:
                 [
                     ["blank", "25px"],
@@ -2232,8 +2465,8 @@
                     ["raw-html", function () { return "You have <h3>" + formatWhole(player.cb.evolutionShards) + "</h3> evolution shards." }, { "color": "#d487fd", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return "<h5>(Gained from check back buttons)" }, { "color": "#d487fd", "font-size": "16px", "font-family": "monospace" }],
                     ["blank", "25px"],
-                    ["raw-html", function () { return player.cb.level.gte(250) ? "You have <h3>" + formatWhole(player.cb.paragonShards) + "</h3> paragon shards." : ""}, { "color": "#2842eb", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.gte(250) ? "<h5>(Gained from XPBoost buttons)" : "" }, { "color": "#2842eb", "font-size": "16px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.gte(250) ? "You have <h3>" + formatWhole(player.cb.paragonShards) + "</h3> paragon shards." : ""}, { "color": "#2842eb", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.gte(250) ? "<h5>(Gained from XPBoost buttons)" : "" }, { "color": "#2842eb", "font-size": "16px", "font-family": "monospace" }],
                     ["blank", "25px"],
                 ]
             },
@@ -2268,11 +2501,11 @@
                 [
                         ["raw-html", function () { return player.cb.petDisplay[player.cb.petDisplayIndex] }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                         ["blank", "25px"],
-                        ["row", [["clickable", 106], ["clickable", 107], ["clickable", 108], ["clickable", 109], ["clickable", 111], ["clickable", 135], ["clickable", 136],  ["clickable", 201],  ["clickable", 203], ["clickable", 202], ["clickable", 204], ["clickable", 216], ["clickable", 215], ["clickable", 214], ["clickable", 217], ["clickable", 227], ["clickable", 229], ["clickable", 228], ["clickable", 231], ["clickable", 301], ["clickable", 302], ]],
+                        ["row", [["clickable", 106], ["clickable", 107], ["clickable", 108], ["clickable", 109], ["clickable", 111], ["clickable", 135], ["clickable", 136], ["clickable", 145], ["clickable", 147],  ["clickable", 201],  ["clickable", 203], ["clickable", 202], ["clickable", 204], ["clickable", 216], ["clickable", 215], ["clickable", 214], ["clickable", 217], ["clickable", 227], ["clickable", 229], ["clickable", 228], ["clickable", 231], ["clickable", 301], ["clickable", 302], ]],
                         ["blank", "25px"],
                         ["raw-html", function () { return "Common Pets" }, { "color": "#9bedff", "font-size": "24px", "font-family": "monospace" }],
                         ["blank", "25px"],
-                        ["row", [["clickable", 101], ["clickable", 102], ["clickable", 103], ["clickable", 104], ["clickable", 105], ["clickable", 133], ["clickable", 134]]],
+                        ["row", [["clickable", 101], ["clickable", 102], ["clickable", 103], ["clickable", 104], ["clickable", 105], ["clickable", 133], ["clickable", 134], ["clickable", 144], ["clickable", 146]]],
                 ]
 
             },
@@ -2283,29 +2516,42 @@
                 [
                     ["raw-html", function () { return player.cb.uncommonPetDisplay[player.cb.uncommonPetDisplayIndex] }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
-                    ["row", [["clickable", 113], ["clickable", 118], ["clickable", 119], ["clickable", 121], ["clickable", 122], ["clickable", 139],["clickable", 141],
+                    ["row", [["clickable", 113], ["clickable", 118], ["clickable", 119], ["clickable", 121], ["clickable", 122], ["clickable", 139],["clickable", 141], ["clickable", 149], ["clickable", 152], 
                     ["clickable", 205],  ["clickable", 207], ["clickable", 206], ["clickable", 208], ["clickable", 209],  ["clickable", 212], ["clickable", 211], ["clickable", 213],  
                     ["clickable", 221], ["clickable", 219], ["clickable", 218], ["clickable", 222], ["clickable", 238], ["clickable", 237], ["clickable", 236], ["clickable", 239], ["clickable", 303], ["clickable", 304],  ]],
                     ["blank", "25px"],
                     ["raw-html", function () { return "Uncommon Pets" }, { "color": "#88e688", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
-                    ["row", [["clickable", 112], ["clickable", 114], ["clickable", 115], ["clickable", 116], ["clickable", 117], ["clickable", 137], ["clickable", 138]]],
+                    ["row", [["clickable", 112], ["clickable", 114], ["clickable", 115], ["clickable", 116], ["clickable", 117], ["clickable", 137], ["clickable", 138], ["clickable", 148], ["clickable", 151], ]],
                 ]
 
             },
             "Rare": {
                 buttonStyle() { return { 'color': '#4e7cff', 'border-color': '#4e7cff' } },
-                unlocked() { return player.cb.level.gte(25) || player.cb.XPBoostUnlock },
+                unlocked() { return player.cb.highestLevel.gte(25) || player.cb.XPBoostUnlock },
                 content:
                 [
                     ["raw-html", function () { return "You have <h3>" + format(player.cb.petPoints) + "</h3> pet points." }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return player.cb.rarePetDisplay[player.cb.rarePetDisplayIndex] }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
-                    ["row", [["clickable", 124], ["clickable", 18], ["clickable", 127], ["clickable", 19], ["clickable", 129], ["clickable", 22], ["clickable", 132], ["clickable", 24], ["clickable", 143], ["clickable", 27], ["clickable", 125], ["clickable", 225], ["clickable", 224], ["clickable", 223], ["clickable", 226], ["clickable", 232], ["clickable", 234], ["clickable", 233], ["clickable", 235], ["clickable", 305], ["clickable", 306], ]],
+                    ["row", [["clickable", 124], ["clickable", 18], ["clickable", 127], ["clickable", 19], ["clickable", 129], ["clickable", 22], ["clickable", 132], ["clickable", 24], ["clickable", 143], ["clickable", 27],  ["clickable", 154], ["clickable", 32],["clickable", 156], ["clickable", 33], ["clickable", 125], ["clickable", 225], ["clickable", 224], ["clickable", 223], ["clickable", 226], ["clickable", 232], ["clickable", 234], ["clickable", 233], ["clickable", 235], ["clickable", 305], ["clickable", 306], ]],
                     ["blank", "25px"],
                     ["raw-html", function () { return "Rare Pets" }, { "color": "#4e7cff", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
-                    ["row", [["clickable", 123], ["clickable", 126], ["clickable", 128], ["clickable", 131], ["clickable", 142]]],
+                    ["row", [["clickable", 123], ["clickable", 126], ["clickable", 128], ["clickable", 131], ["clickable", 142], ["clickable", 153], ["clickable", 155]]],
+                ]
+
+            },
+            "Epic": {
+                buttonStyle() { return { 'color': '#7d3c98', 'border-color': '#7d3c98', 'background-color': '#cb79ed' } },
+                unlocked() { return player.cb.highestLevel.gte(1500) },
+                content:
+                [
+                    //["raw-html", function () { return "You have <h3>" + format(player.cb.petPoints) + "</h3> pet points." }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    //["raw-html", function () { return player.cb.rarePetDisplay[player.cb.rarePetDisplayIndex] }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["blank", "25px"],
+                    ["raw-html", function () { return "Epic Pets" }, { "color": "#cb79ed", "font-size": "24px", "font-family": "monospace" }],
+                    ["blank", "25px"],
                 ]
 
             },
@@ -2318,18 +2564,18 @@
                 [
                     ["raw-html", function () { return player.cb.buttonUnlocks[1] == false ?  "You will unlock something at level 3!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return player.cb.buttonUnlocks[2] == false && player.cb.buttonUnlocks[1] == true ?  "You will unlock something at level 6!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(10) && player.cb.buttonUnlocks[2] == true ?  "You will unlock something at level 10!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(15) && player.cb.level.gte(10) ?  "You will unlock something at level 15!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(25) && player.cb.level.gte(15) ?  "You will unlock something at level 25!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(35) && player.cb.level.gte(25) ?  "You will unlock something at level 35!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(50) && player.cb.level.gte(35) ?  "You will unlock something at level 50!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(65) && player.cb.level.gte(50) ?  "You will unlock something at level 65! (Pet shop)" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(75) && player.cb.level.gte(65) ?  "You will unlock something at level 75!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(100) && player.cb.level.gte(75) && hasUpgrade("ip", 31) ?  "You will unlock something at level 100!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(125) && player.cb.level.gte(100) && hasChallenge("ip", 12) ?  "You will unlock something at level 125!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(150) && player.cb.level.gte(125) ?  "You will unlock something at level 150!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(250) && player.cb.level.gte(150) ?  "You will unlock something at level 250!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(666) && player.cb.level.gte(250) ?  "You will unlock something at level 666!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(10) && player.cb.buttonUnlocks[2] == true ?  "You will unlock something at level 10!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(15) && player.cb.highestLevel.gte(10) ?  "You will unlock something at level 15!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(25) && player.cb.highestLevel.gte(15) ?  "You will unlock something at level 25!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(35) && player.cb.highestLevel.gte(25) ?  "You will unlock something at level 35!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(50) && player.cb.highestLevel.gte(35) ?  "You will unlock something at level 50!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(65) && player.cb.highestLevel.gte(50) ?  "You will unlock something at level 65! (Pet shop)" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(75) && player.cb.highestLevel.gte(65) ?  "You will unlock something at level 75!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(100) && player.cb.highestLevel.gte(75) && hasUpgrade("ip", 31) ?  "You will unlock something at level 100!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(125) && player.cb.highestLevel.gte(100) && hasChallenge("ip", 12) ?  "You will unlock something at level 125!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(150) && player.cb.highestLevel.gte(125) ?  "You will unlock something at level 150!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(250) && player.cb.highestLevel.gte(150) ?  "You will unlock something at level 250!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(666) && player.cb.highestLevel.gte(250) ?  "You will unlock something at level 666!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
                     ["row", [["clickable", 11], ["blank", "25px"], ["raw-html", function () { return player.ev.evolutionsUnlocked[4] ? "Auto: " + format(player.cb.buttonAutomationTimers[0]) + "/" +  format(player.cb.buttonAutomationTimersMax[0]): "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],]],
                     ["row", [["clickable", 12], ["blank", "25px"], ["raw-html", function () { return player.ev.evolutionsUnlocked[4] ? "Auto: " + format(player.cb.buttonAutomationTimers[1]) + "/" +  format(player.cb.buttonAutomationTimersMax[1]): "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],]],
@@ -2349,18 +2595,18 @@
                 [
                     ["raw-html", function () { return player.cb.buttonUnlocks[1] == false ?  "You will unlock something at level 3!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return player.cb.buttonUnlocks[2] == false && player.cb.buttonUnlocks[1] == true ?  "You will unlock something at level 6!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(10) && player.cb.buttonUnlocks[2] == true ?  "You will unlock something at level 10!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(15) && player.cb.level.gte(10) ?  "You will unlock something at level 15!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(25) && player.cb.level.gte(15) ?  "You will unlock something at level 25!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(35) && player.cb.level.gte(25) ?  "You will unlock something at level 35!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(50) && player.cb.level.gte(35) ?  "You will unlock something at level 50!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(65) && player.cb.level.gte(50) ?  "You will unlock something at level 65! (Pet shop)" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(75) && player.cb.level.gte(65) ?  "You will unlock something at level 75!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(100) && player.cb.level.gte(75) && hasUpgrade("ip", 31) ?  "You will unlock something at level 100!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(125) && player.cb.level.gte(100) && hasChallenge("ip", 12) ?  "You will unlock something at level 125!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(150) && player.cb.level.gte(125) ?  "You will unlock something at level 150!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(250) && player.cb.level.gte(150) ?  "You will unlock something at level 250!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(666) && player.cb.level.gte(250) ?  "You will unlock something at level 666!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(10) && player.cb.buttonUnlocks[2] == true ?  "You will unlock something at level 10!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(15) && player.cb.highestLevel.gte(10) ?  "You will unlock something at level 15!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(25) && player.cb.highestLevel.gte(15) ?  "You will unlock something at level 25!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(35) && player.cb.highestLevel.gte(25) ?  "You will unlock something at level 35!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(50) && player.cb.highestLevel.gte(35) ?  "You will unlock something at level 50!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(65) && player.cb.highestLevel.gte(50) ?  "You will unlock something at level 65! (Pet shop)" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(75) && player.cb.highestLevel.gte(65) ?  "You will unlock something at level 75!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(100) && player.cb.highestLevel.gte(75) && hasUpgrade("ip", 31) ?  "You will unlock something at level 100!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(125) && player.cb.highestLevel.gte(100) && hasChallenge("ip", 12) ?  "You will unlock something at level 125!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(150) && player.cb.highestLevel.gte(125) ?  "You will unlock something at level 150!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(250) && player.cb.highestLevel.gte(150) ?  "You will unlock something at level 250!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(666) && player.cb.highestLevel.gte(250) ?  "You will unlock something at level 666!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
                     ["row", [["clickable", 15]]],
                     ["row", [["clickable", 17]]],
@@ -2376,18 +2622,19 @@
                 [
                     ["raw-html", function () { return player.cb.buttonUnlocks[1] == false ?  "You will unlock something at level 3!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return player.cb.buttonUnlocks[2] == false && player.cb.buttonUnlocks[1] == true ?  "You will unlock something at level 6!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(10) && player.cb.buttonUnlocks[2] == true ?  "You will unlock something at level 10!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(15) && player.cb.level.gte(10) ?  "You will unlock something at level 15!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(25) && player.cb.level.gte(15) ?  "You will unlock something at level 25!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(35) && player.cb.level.gte(25) ?  "You will unlock something at level 35!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(50) && player.cb.level.gte(35) ?  "You will unlock something at level 50!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(65) && player.cb.level.gte(50) ?  "You will unlock something at level 65! (Pet shop)" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(75) && player.cb.level.gte(65) ?  "You will unlock something at level 75!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(100) && player.cb.level.gte(75) && hasUpgrade("ip", 31) ?  "You will unlock something at level 100!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(125) && player.cb.level.gte(100) && hasChallenge("ip", 12) ?  "You will unlock something at level 125!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(150) && player.cb.level.gte(125) ?  "You will unlock something at level 150!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(250) && player.cb.level.gte(150) ?  "You will unlock something at level 250!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-                    ["raw-html", function () { return player.cb.level.lt(666) && player.cb.level.gte(250) ?  "You will unlock something at level 666!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(10) && player.cb.buttonUnlocks[2] == true ?  "You will unlock something at level 10!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(15) && player.cb.highestLevel.gte(10) ?  "You will unlock something at level 15!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(25) && player.cb.highestLevel.gte(15) ?  "You will unlock something at level 25!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(35) && player.cb.highestLevel.gte(25) ?  "You will unlock something at level 35!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(50) && player.cb.highestLevel.gte(35) ?  "You will unlock something at level 50!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(65) && player.cb.highestLevel.gte(50) ?  "You will unlock something at level 65! (Pet shop)" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(75) && player.cb.highestLevel.gte(65) ?  "You will unlock something at level 75!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(100) && player.cb.highestLevel.gte(75) && hasUpgrade("ip", 31) ?  "You will unlock something at level 100!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(125) && player.cb.highestLevel.gte(100) && hasChallenge("ip", 12) ?  "You will unlock something at level 125!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(150) && player.cb.highestLevel.gte(125) ?  "You will unlock something at level 150!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(250) && player.cb.highestLevel.gte(150) ?  "You will unlock something at level 250!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(666) && player.cb.highestLevel.gte(250) ?  "You will unlock something at level 666!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return player.cb.highestLevel.lt(1500) && player.cb.highestLevel.gte(666) ?  "You will unlock something at level 1500!" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
                     ["raw-html", function () { return "You have <h3>" + format(player.cb.XPBoost) + "</h3> XPBoost." }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
@@ -2446,6 +2693,7 @@
     tabFormat: [
         ["raw-html", function () { return "You have <h3>" + format(player.points) + "</h3> celestial points (" + format(player.gain) + "/s)." }, { "color": "white", "font-size": "16px", "font-family": "monospace" }],
         ["raw-html", function () { return "You are level " + formatWhole(player.cb.level) + ", which boosts celestial point gain by x" + format(player.cb.levelEffect) + "."}, { "color": "white", "font-size": "32px", "font-family": "monospace" }],
+        ["raw-html", function () { return "(Highest Level: " + formatWhole(player.cb.highestLevel) + ")"}, { "color": "white", "font-size": "12px", "font-family": "monospace" }],
         ["raw-html", function () { return !hasMilestone("ip", 24) ? "YOU MUST REACH 1e100 POINTS TO ACTIVATE CHECK BACK AND PET EFFECT" : ""}, { "color": "white", "font-size": "16px", "font-family": "monospace" }],
         ["raw-html", function () { return inChallenge("ip", 17) ? "You are losing " + formatWhole(player.cb.lossRate) + " xp per second." : ""}, { "color": "white", "font-size": "16px", "font-family": "monospace" }],
         ["row", [["bar", "xpbar"]]],
