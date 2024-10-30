@@ -619,7 +619,7 @@ var cnPrefix = {
     "7th dimension": "第 7 维度",
     "8th dimension": "第 8 维度",
     "rocket fuel, which boost grassshoppers by x": "火箭燃料，提升蚱蜢增 x",
-    "": "",
+    "Next factor unlocks at tier ": "下一个因子解锁于层级 ",
     "": "",
     "": "",
     "": "",
