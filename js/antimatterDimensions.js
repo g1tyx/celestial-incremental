@@ -179,6 +179,7 @@
         player.ad.tickspeedMult = new Decimal(1.125)
         player.ad.tickspeedMult = player.ad.tickspeedMult.add(player.ad.galaxyEffect)
         player.ad.tickspeedMult = player.ad.tickspeedMult.add(buyableEffect("ca", 22))
+        if (hasUpgrade("ev1", 12)) player.ad.tickspeedMult = player.ad.tickspeedMult.mul(upgradeEffect("ev1", 12))
         //dimboost
 
         if (player.ad.dimBoostAmount.gt(4)) 
@@ -198,6 +199,7 @@
 
         player.ad.dimBoostMult = new Decimal(2)
         player.ad.dimBoostMult = player.ad.dimBoostMult.mul(buyableEffect("ca", 21))
+        if (hasUpgrade("ev2", 11)) player.ad.dimBoostMult = player.ad.dimBoostMult.mul(upgradeEffect("ev2", 11))
         player.ad.dimBoostEffect = Decimal.pow(player.ad.dimBoostMult, player.ad.dimBoostAmount)
 
         if (player.ad.dimBoostDimCost.eq(3)) player.ad.dimBoostText = "Req: " + player.ad.dimBoostReq + " 4th dimensions."
@@ -820,7 +822,7 @@
                     ["blank", "25px"],
                     ["row", [["clickable", 11], ["clickable", 12]]],
                     ["blank", "25px"],
-                    ["raw-html", function () { return "Antimatter galaxy limit: " + formatWhole(player.g.galaxyLimit) }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+                    ["raw-html", function () { return "Antimatter galaxy limit: " + formatWhole(player.ad.galaxyLimit) }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
                     ["raw-html", function () { return player.ad.extraDimsGalaxiesLocked ?  "You are capped at 6 dimension boosts and 1 galaxy (for now)" : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return player.ad.extraDimsGalaxiesLocked ?  "Progress gets halted at 1e300 antimatter." : "" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],

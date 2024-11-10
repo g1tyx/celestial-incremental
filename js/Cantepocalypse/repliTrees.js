@@ -44,6 +44,7 @@
         multAdd = new Decimal(0)
         multAdd = buyableEffect("rt", 11)
         multAdd = multAdd.mul(player.rg.repliGrassEffect2)
+        multAdd = multAdd.mul(player.cb.epicPetEffects[1][2])
 
         player.rt.repliLeavesTimerReq = new Decimal(6)
         if (hasUpgrade("an", 21)) player.rt.repliLeavesTimerReq = player.rt.repliLeavesTimerReq.sub(1.5)
@@ -107,7 +108,7 @@
             onClick() {
                 player.buyMax = true
             },
-            style: { width: '75px', "min-height": '75px', }
+            style: { width: '75px', "min-height": '50px', }
         },
         3: {
             title() { return "Buy Max Off" },
@@ -116,7 +117,7 @@
             onClick() {
                 player.buyMax = false
             },
-            style: { width: '75px', "min-height": '75px', }
+            style: { width: '75px', "min-height": '50px', }
         },
     },
     bars: {
@@ -426,8 +427,6 @@
                 content:
                 [
                     ["blank", "25px"],
-                    ["row", [["clickable", 2], ["clickable", 3]]],
-                    ["blank", "25px"],
                     ["raw-html", function () { return "<h2>You have " + formatWhole(player.rt.repliTrees) + "<h2> repli-trees, which boost anonymity gain by x" + format(player.rt.repliTreesEffect) + "."}],
                     ["raw-html", function () { return "<h2>You will gain " + format(player.rt.repliTreesToGet, 1) + "<h2> repli-trees." }],
                     ["raw-html", function () { return "<h2>Repli-Leaves mult: x" + format(player.rt.repliLeavesMult, 4) + "<h2>." }],
@@ -436,6 +435,8 @@
                     ["row", [["bar", "repliTreeBar"]]],
                     ["row", [["bar", "replileafBar"]]],
                     ["blank", "25px"],
+                    ["row", [["clickable", 2], ["clickable", 3]]],
+                    ["blank", "25px"], 
                     ["row", [["buyable", 11], ["buyable", 12], ["buyable", 13], ["buyable", 14]]],
                     ["row", [["buyable", 15], ["buyable", 16], ["buyable", 17], ["buyable", 18]]],
                 ]

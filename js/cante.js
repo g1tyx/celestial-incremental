@@ -60,6 +60,7 @@
         player.ca.replicantiMult = player.ca.replicantiMult.add(buyableEffect("rm", 34))
         player.ca.replicantiMult = player.ca.replicantiMult.mul(buyableEffect("g", 26))
         player.ca.replicantiMult = player.ca.replicantiMult.mul(player.cb.commonPetEffects[7][0])
+        if (hasUpgrade("ep0", 11)) player.ca.replicantiMult = player.ca.replicantiMult.mul(upgradeEffect("ep0", 11))
 
         player.ca.replicantiTimerReq = new Decimal(1)
         player.ca.replicantiTimerReq = player.ca.replicantiTimerReq.div(buyableEffect("ca", 13))
@@ -85,6 +86,7 @@
         //CANTE
         player.ca.canteEnergyMult = new Decimal(1)
         player.ca.canteEnergyMult = player.ca.canteEnergyMult.mul(player.ca.rememberanceCoresEffect)
+        player.ca.canteEnergyMult = player.ca.canteEnergyMult.mul(player.cb.epicPetEffects[2][0])
 
         if (player.ca.canteEnergy.gte(player.ca.canteEnergyReq))
         {
@@ -715,6 +717,8 @@
         ["raw-html", function () { return "Replicanti Mult: " + format(player.ca.replicantiMult) + "x" }, { "color": "white", "font-size": "22px", "font-family": "monospace" }],
         ["raw-html", function () { return "Replicate Chance: " + format(player.ca.replicateChance.mul(100)) + "%" }, { "color": "white", "font-size": "22px", "font-family": "monospace" }],
         ["blank", "25px"],
+        ["row", [["clickable", 2], ["clickable", 3]]],
+        ["blank", "25px"], 
         ["row", [["buyable", 11], ["buyable", 12], ["buyable", 13]]],
         ["row", [["buyable", 14], ["buyable", 15], ["buyable", 16]]],
         ["row", [["buyable", 17], ["buyable", 18], ["buyable", 19]]],
@@ -733,6 +737,8 @@
         ["blank", "25px"],
         ["row", [["clickable", 12]]],
         ["blank", "25px"],
+        ["row", [["clickable", 2], ["clickable", 3]]],
+        ["blank", "25px"], 
         ["row", [["buyable", 21], ["buyable", 22], ["buyable", 23], ["buyable", 24]]],
         ["blank", "25px"],
         ["raw-html", function () { return "You have <h3>" + formatWhole(player.ca.replicantiGalaxies) + "/" + formatWhole(player.ca.replicantiGalaxiesCap) + "</h3> replicanti galaxies." }, { "color": "#979EE8", "font-size": "24px", "font-family": "monospace" }],

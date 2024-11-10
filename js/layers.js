@@ -48,6 +48,10 @@ addLayer("i", {
             player.gain = new Decimal(1)
         }
 
+        if (player.tab == "cb")
+        {
+            player.universe = 0.5
+        }
         if (player.tab == "i")
         {
             player.universe = 1
@@ -82,6 +86,9 @@ addLayer("i", {
         } else if (player.universe == 2 && options.musicToggle)
         {
             playAndLoopAudio("music/universe2.mp3", options.musicVolume/10);
+        } else if (player.universe == 0.5 && options.musicToggle)
+        {
+            playAndLoopAudio("music/checkback.mp3", options.musicVolume/10);
         } 
         else if (player.universe == -1 && options.musicToggle)
         {
@@ -391,7 +398,7 @@ addLayer("i", {
         31:
         {
             title: "Challenge I.",
-            unlocked() { return inChallenge("ip", 11) && player.cap.reqSelect.eq(0)},
+            unlocked() { return inChallenge("ip", 11) && player.cap.reqSelect.eq(0) && hasUpgrade("bi", 28)},
             description: ".",
             cost: new Decimal("1e28750"),
             currencyLocation() { return player },
@@ -401,7 +408,7 @@ addLayer("i", {
         32:
         {
             title: "Challenge II.",
-            unlocked() { return inChallenge("ip", 12) && player.cap.reqSelect.eq(0)},
+            unlocked() { return inChallenge("ip", 12) && player.cap.reqSelect.eq(0) && hasUpgrade("bi", 28)},
             description: ".",
             cost: new Decimal("1e28400"),
             currencyLocation() { return player },
@@ -411,7 +418,7 @@ addLayer("i", {
         33:
         {
             title: "Challenge III.",
-            unlocked() { return inChallenge("ip", 13) && player.cap.reqSelect.eq(0)},
+            unlocked() { return inChallenge("ip", 13) && player.cap.reqSelect.eq(0) && hasUpgrade("bi", 28)},
             description: ".",
             cost: new Decimal("1e6150"),
             currencyLocation() { return player },
@@ -421,7 +428,7 @@ addLayer("i", {
         34:
         {
             title: "Challenge IV.",
-            unlocked() { return inChallenge("ip", 14) && player.cap.reqSelect.eq(0)},
+            unlocked() { return inChallenge("ip", 14) && player.cap.reqSelect.eq(0) && hasUpgrade("bi", 28)},
             description: ".",
             cost: new Decimal("1e1380"),
             currencyLocation() { return player },
@@ -431,7 +438,7 @@ addLayer("i", {
         35:
         {
             title: "Challenge VIII.",
-            unlocked() { return inChallenge("ip", 18) && player.cap.reqSelect.eq(0)},
+            unlocked() { return inChallenge("ip", 18) && player.cap.reqSelect.eq(0) && hasUpgrade("bi", 28)},
             description: ".",
             cost: new Decimal("1e10750"),
             currencyLocation() { return player },

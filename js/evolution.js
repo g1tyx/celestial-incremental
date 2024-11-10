@@ -94,7 +94,7 @@
             "<br>"  + formatWhole(player.cb.evolvedLevels[1]) + "/6 MrRedShark Level" + 
             "<br>"  + formatWhole(player.cb.evolvedLevels[2]) + "/5 Insane Face Level" + 
             "<br>"  + format(player.cb.XPBoost) + "/7.00 XPBoost" + 
-            "<br>"  + formatWhole(player.cb.rarePetLevels[1]) + "/5 Dice Level",
+            "<br>"  + formatWhole(player.cb.rarePetLevels[1]) + "/3 Dice Level",
 
             "Evolve Spider<br>" + formatWhole(player.cb.evolutionShards) + "/10 Evolution Shards" +
             "<br>"  + formatWhole(player.cb.paragonShards) + "/2 Paragon Shards" + 
@@ -236,7 +236,7 @@
         19: {
             title() { return player.cb.uncommonPetImage[1] },
             canClick() { return true},
-            unlocked() { return !player.ev.evolutionsUnlocked[4] && player.cb.level.gt(250)},
+            unlocked() { return !player.ev.evolutionsUnlocked[4] && player.cb.highestLevel.gt(250)},
             onClick() {
                 player.ev.evolutionDisplayIndex = new Decimal(4)
             },
@@ -269,7 +269,7 @@
         22: {
             title() { return player.cb.rarePetImage[1] },
             canClick() { return true},
-            unlocked() { return !player.ev.evolutionsUnlocked[5] && player.cb.level.gt(250)},
+            unlocked() { return !player.ev.evolutionsUnlocked[5] && player.cb.highestLevel.gt(250)},
             onClick() {
                 player.ev.evolutionDisplayIndex = new Decimal(5)
             },
@@ -277,7 +277,7 @@
         },
         23: {
             title() { return "EVOLVE" },
-            canClick() { return player.cb.evolutionShards.gte(25) && player.cb.paragonShards.gte(1) && player.d.dicePoints.gte(1e45) && player.cb.evolvedLevels[0].gte(6) && player.cb.evolvedLevels[1].gte(6) && player.cb.evolvedLevels[2].gte(5) && player.cb.XPBoost.gte(7) && player.cb.rarePetLevels[1].gte(5) },
+            canClick() { return player.cb.evolutionShards.gte(25) && player.cb.paragonShards.gte(1) && player.ta.highestDicePoints.gte(1e45) && player.cb.evolvedLevels[0].gte(6) && player.cb.evolvedLevels[1].gte(6) && player.cb.evolvedLevels[2].gte(5) && player.cb.XPBoost.gte(7) && player.cb.rarePetLevels[1].gte(3) },
             unlocked() { return player.ev.evolutionDisplayIndex == 5 },
             onClick() {
                 player.ev.evolutionDisplayIndex = new Decimal(-1)
@@ -452,6 +452,24 @@ addLayer("ev0", {
             },
             style: { width: '100px', "min-height": '50px', 'background-image': 'linear-gradient(90deg, #e7c97c, #fad25a)', 'border-width': "10px" },
         },
+        2: {
+            title() { return "Buy Max On" },
+            canClick() { return player.buyMax == false },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = true
+            },
+            style: { width: '75px', "min-height": '50px', }
+        },
+        3: {
+            title() { return "Buy Max Off" },
+            canClick() { return player.buyMax == true  },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = false
+            },
+            style: { width: '75px', "min-height": '50px', }
+        },
     },
     bars: {
     },
@@ -602,6 +620,8 @@ addLayer("ev0", {
                 content:
                 [
                     ["blank", "25px"],
+                    ["row", [["clickable", 2], ["clickable", 3]]],
+                    ["blank", "25px"], 
                     ["row", [["buyable", 11], ["buyable", 12], ["buyable", 13], ["buyable", 14]]],
                 ]
 
@@ -1224,7 +1244,7 @@ addLayer("ev2", {
         xpDay: true,
         cooldown: new Decimal(0),
         cooldownMax: new Decimal(86400),
-        xpReward: new Decimal(500),
+        xpReward: new Decimal(150),
     }
     },
     automate() {
@@ -1236,8 +1256,17 @@ addLayer("ev2", {
     update(delta) {
         let onepersec = new Decimal(1)
 
-        player.ev2.xpReward = new Decimal(500)
-        player.ev2.xpReward = player.ev2.xpReward.add(player.ev2.day.sub(1).mul(50))
+        player.ev2.xpReward = new Decimal(150)
+        player.ev2.xpReward = player.ev2.xpReward.add(player.ev2.day.sub(1).mul(15).pow(.8))
+        player.ev2.xpReward = player.ev2.xpReward.mul(buyableEffect("gh", 21))
+        player.ev2.xpReward = player.ev2.xpReward.mul(player.cb.commonPetEffects[0][1])
+        player.ev2.xpReward = player.ev2.xpReward.mul(player.cb.uncommonPetEffects[4][0])
+        player.ev2.xpReward = player.ev2.xpReward.mul(player.cb.rarePetEffects[0][1])
+        player.ev2.xpReward = player.ev2.xpReward.mul(player.ev0.coinDustEffect)
+        player.ev2.xpReward = player.ev2.xpReward.mul(player.cb.XPBoost)
+        player.ev2.xpReward = player.ev2.xpReward.mul(player.d.diceEffects[12])
+        player.ev2.xpReward = player.ev2.xpReward.mul(player.rm.realmModsEffect[0])
+        player.ev2.xpReward = player.ev2.xpReward.mul(buyableEffect("g", 25))
 
         player.ev2.cooldown = player.ev2.cooldown.sub(onepersec.mul(delta))
     },
@@ -1281,6 +1310,7 @@ addLayer("ev2", {
         if (player.ev2.xpDay)
         {
             player.cb.xp = player.cb.xp.add(player.ev2.xpReward)
+            player.cb.totalxp = player.cb.totalxp.add(player.ev2.xpReward)
             callAlert("You gained " + format(player.ev2.xpReward) + " XP!");
         } else if (player.ev2.petDay)
         {
@@ -1431,6 +1461,24 @@ addLayer("ev4", {
             },
             style: { width: '100px', "min-height": '50px', 'background-image': '#febc06' },
         },
+        2: {
+            title() { return "Buy Max On" },
+            canClick() { return player.buyMax == false },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = true
+            },
+            style: { width: '75px', "min-height": '50px', }
+        },
+        3: {
+            title() { return "Buy Max Off" },
+            canClick() { return player.buyMax == true  },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = false
+            },
+            style: { width: '75px', "min-height": '50px', }
+        },
     },
     gainAutomationShard()
     {
@@ -1477,14 +1525,14 @@ addLayer("ev4", {
                 let growth = 1.2
                 if (player.buyMax == false)
                 {
-                    let buyonecost = new Decimal(growth).pow(getBuyableAmount(this.layer, this.id)).mul(base)
+                    let buyonecost = new Decimal(growth).pow(getBuyableAmount(this.layer, this.id)).mul(base).floor()
                     player.cb.evolutionShards = player.cb.evolutionShards.sub(buyonecost)
                     setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
                 } else
                 {
     
                 let max = Decimal.affordGeometricSeries(player.cb.evolutionShards, base, growth, getBuyableAmount(this.layer, this.id))
-                let cost = Decimal.sumGeometricSeries(max, base, growth, getBuyableAmount(this.layer, this.id))
+                let cost = Decimal.sumGeometricSeries(max, base, growth, getBuyableAmount(this.layer, this.id)).floor()
                 player.cb.evolutionShards = player.cb.evolutionShards.sub(cost)
 
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(max))
@@ -1546,6 +1594,8 @@ addLayer("ev4", {
                     ["raw-html", function () { return "You have <h3>" + formatWhole(player.cb.evolutionShards) + "</h3> evolution shards." }, { "color": "#d487fd", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return "You have <h3>" + formatWhole(player.cb.paragonShards) + "</h3> paragon shards." }, { "color": "#2842eb", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
+                    ["row", [["clickable", 2], ["clickable", 3]]],
+                    ["blank", "25px"], 
                     ["row", [["buyable", 11], ["buyable", 12]]],
                     ["raw-html", function () { return "Offering multiplier: <h3>" + format(player.ev4.offeringsBase) + "</h3>x" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                 ]

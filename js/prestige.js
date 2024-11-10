@@ -84,6 +84,8 @@
         player.p.crystalsToGet = player.p.crystalsToGet.mul(buyableEffect("oi", 22))
         player.p.crystalsToGet = player.p.crystalsToGet.mul(player.cb.evolvedEffects[6][1])
         player.p.crystalsToGet = player.p.crystalsToGet.mul(player.cb.rarePetEffects[5][1])
+        if (hasUpgrade("ev1", 11)) player.p.crystalsToGet = player.p.crystalsToGet.mul(upgradeEffect("ev1", 11))
+
     },
     prestigeReset()
     {
@@ -258,6 +260,24 @@
                 player.tab = "i"
             },
             style: { width: '100px', "min-height": '50px' },
+        },
+        2: {
+            title() { return "Buy Max On" },
+            canClick() { return player.buyMax == false },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = true
+            },
+            style: { width: '75px', "min-height": '50px', }
+        },
+        3: {
+            title() { return "Buy Max Off" },
+            canClick() { return player.buyMax == true  },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = false
+            },
+            style: { width: '75px', "min-height": '50px', }
         },
         11: {
             title() { return "<h3>Prestige, but reset all ranks and factors. <br>(Req: 100,000 Celestial Points)" },
@@ -705,6 +725,8 @@
                     ["blank", "25px"],
                     ["row", [["clickable", 12]]],
                     ["blank", "25px"],
+                    ["row", [["clickable", 2], ["clickable", 3]]],
+                    ["blank", "25px"], 
                     ["row", [["buyable", 11], ["buyable", 12], ["buyable", 13], ["buyable", 14]]],
                     ["row", [["buyable", 15], ["buyable", 16], ["buyable", 17], ["buyable", 18]]],
                 ]

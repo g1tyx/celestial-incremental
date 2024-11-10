@@ -61,6 +61,7 @@
         player.tab == "ev8" ? "#242525" : 
         player.tab == "rm" ? "linear-gradient(90deg, #311100, #313000, #163100, #003105, #003121, #002C31, #001431, #000031, #300031)" : 
         player.tab == "s" ? "#2D0000" : 
+        player.tab == "epic" || player.tab == "ep0" || player.tab == "ep1"  || player.tab == "ep2" ? "#7d3f98" : 
         "#161616");
 
         //1
@@ -257,10 +258,10 @@
         }
 
         //10
-        if (player.c.cutscenes[9] && hasUpgrade("bi", 24))
+        if (player.c.cutscenes[9] && hasUpgrade("bi", 28))
         {
             player.c.currentCutscene = 10
-        } else if (hasUpgrade("bi", 24))
+        } else if (hasUpgrade("bi", 28))
         {
             player.c.currentCutscene = 0
         }

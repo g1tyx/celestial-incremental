@@ -160,6 +160,7 @@
         player.d.challengeDicePointsToGet = player.d.challengeDicePointsToGet.mul(buyableEffect("d", 24))
         player.d.challengeDicePointsToGet = player.d.challengeDicePointsToGet.mul(buyableEffect("g", 28))
         player.d.challengeDicePointsEffect = player.d.challengeDicePoints.pow(0.75).add(1)
+        if (hasUpgrade("ev2", 12)) player.d.challengeDicePointsEffect = player.d.challengeDicePointsEffect.mul(upgradeEffect("ev2", 12))
 
         if (hasUpgrade("i", 29)) player.d.challengeDicePoints = player.d.challengeDicePoints.add(player.d.challengeDicePointsToGet.mul(0.05).mul(delta))
 
@@ -237,6 +238,24 @@
                 "min-height": '75px',
             },
         },
+        4: {
+            title() { return "Buy Max On" },
+            canClick() { return player.buyMax == false },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = true
+            },
+            style: { width: '75px', "min-height": '50px', }
+        },
+        5: {
+            title() { return "Buy Max Off" },
+            canClick() { return player.buyMax == true  },
+            unlocked() { return true },
+            onClick() {
+                player.buyMax = false
+            },
+            style: { width: '75px', "min-height": '50px', }
+        },
         11: {
             title() { return player.d.diceCooldown.gt(0) ? formatTime(player.d.diceCooldown) : "<h2>Roll!"},
             display() { return "Autoroll: " + formatTime(player.d.autoRollCooldown) },
@@ -269,6 +288,8 @@
                 {
                     player.in.infinityPause = new Decimal(5)
                 }
+                
+                if (player.ev.evolutionsUnlocked[5]) player.d.challengeDicePoints = player.d.challengeDicePoints.add(player.d.challengeDicePointsToGet)
             },
             style: { width: '200px', "min-height": '100px' },
         },
@@ -786,6 +807,8 @@
                     ["raw-html", function () { return "Current rolls: " + player.d.rollText + '.'}, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["raw-html", function () { return "+" + formatWhole(player.d.gainedDicePointsDisplay) + ' DP.'}, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
                     ["blank", "25px"],
+                    ["row", [["clickable", 4], ["clickable", 5]]],
+                    ["blank", "25px"], 
                     ["row", [["buyable", 12], ["buyable", 13], ["buyable", 14], ["buyable", 15]]],
     ]
 
@@ -819,6 +842,8 @@
         ["raw-html", function () { return "You have <h3>" + format(player.d.challengeDicePoints) + "</h3> challenge dice points, which boost dice point gain by x" + format(player.d.challengeDicePointsEffect) + "." }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
         ["raw-html", function () { return "You will gain <h3>" + format(player.d.challengeDicePointsToGet) + "</h3> challenge dice points next booster dice roll." }, { "color": "white", "font-size": "16px", "font-family": "monospace" }],
         ["blank", "25px"],
+        ["row", [["clickable", 4], ["clickable", 5]]],
+        ["blank", "25px"], 
         ["row", [["buyable", 21], ["buyable", 22], ["buyable", 23], ["buyable", 24]]],
         ["blank", "25px"],
         ["row", [["upgrade", 11], ["upgrade", 12], ["upgrade", 13], ["upgrade", 14], ["upgrade", 15], ["upgrade", 16], ["upgrade", 17]]],
