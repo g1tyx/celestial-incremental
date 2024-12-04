@@ -141,7 +141,7 @@
         1: {
             title() { return "<h2>Return" },
             canClick() { return true },
-            unlocked() { return true },
+            unlocked() { return options.newMenu == false },
             onClick() {
                 player.tab = "in"
             },
@@ -219,8 +219,13 @@
             unlocked() { return true },
             onClick() {
                 player.ca.defeatedCante = true
-                player.tab = 'po'
-                player.subtabs["po"]['stuff'] = 'Portals'
+                if (options.newMenu) {
+                    player.tab = 'ca'
+                    player.microtabs["ca"]['stuff'] = 'Main'
+                } else {
+                    player.tab = 'po'
+                    player.subtabs["po"]['stuff'] = 'Portals'
+                }
             },
             style: { width: '500px', "min-height": '200px',},
         },
@@ -753,7 +758,7 @@
                 content:
                 [
         ["blank", "25px"],
-        ["raw-html", function () { return "You have <h3>" + formatWhole(player.ca.canteCores) + "</h3> Cante's cores." }, { "color": "white", "font-size": "26px", "font-family": "monospace" }],
+        ["raw-html", function () { return "You have <h3>" + formatWhole(player.ca.canteCores) + "</h3> Cante cores." }, { "color": "white", "font-size": "26px", "font-family": "monospace" }],
         ["blank", "25px"],
         ["row", [["bar", "bar"]]],
         ["blank", "25px"],

@@ -58,7 +58,7 @@
         1: {
             title() { return "<h2>Return" },
             canClick() { return true },
-            unlocked() { return true },
+            unlocked() { return options.newMenu == false },
             onClick() {
                 player.tab = "cp"
             },
@@ -86,7 +86,7 @@
             style: { width: '400px', "min-height": '50px'},
         },
         13: {
-            title() { return "<h3>Reset replicanti points, rank points and tier points for tetr points." },
+            title() { return "<h3>Reset replicanti points, rank points, and tier points for tetr points." },
             canClick() { return player.ar.tetrPointsToGet.gte(1) },
             unlocked() { return hasUpgrade("cp", 13) },
             onClick() {
@@ -113,16 +113,16 @@
             display() {
                 return "Time: " + formatTime(player.cp.replicantiPointsTimer) + "/" + formatTime(player.cp.replicantiPointsTimerReq);
             },
-        }, 
+        },
     },
     upgrades: {
 
     },
     buyables: {
-  
+
     },
     milestones: {
-   
+
     },
     challenges: {
     },
@@ -154,7 +154,7 @@
 
             },
         },
-    }, 
+    },
 
     tabFormat: [
         ["raw-html", function () { return "You have <h3>" + format(player.cp.replicantiPoints) + "</h3> replicanti points." }, { "color": "white", "font-size": "20px", "font-family": "monospace" }],
