@@ -13,7 +13,8 @@ function getStartOptions() {
 		showStory: true,
 		forceOneTab: true,
 		oldStyle: false,
-		tooltipForcing: true,
+		forceTooltips: true,
+		hideMilestonePopups: false,
 		musicToggle: true,
 		musicVolume: 3,
 		toggleHotkey: true,
@@ -26,6 +27,7 @@ function updateMusicVolume() {
     const input = document.getElementById("volume");
     options.musicVolume = parseInt(input.value);
 }
+
 function toggleOpt(name) {
 	if (name == "oldStyle" && styleCooldown > 0)
 		return;

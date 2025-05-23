@@ -16,37 +16,87 @@ addLayer("in", {
 
         infinities: new Decimal(0),
         infinitiesToGet: new Decimal(1),
-    }
-    },
-    automate() {
-        
-    },
+
+        delay: new Decimal(0),
+    }},
+    automate() {},
     nodeStyle() {
         return {
             background: "linear-gradient(140deg, #10e96b 0%, #0f871c 100%)",
             "background-origin": "border-box",
             "border-color": "#119B35",
         }
-      },
-
+    },
     tooltip: "Universe 2 - Antimatter World",
     color: "white",
     branches: ["i"],
     update(delta) {
-
         let onepersec = new Decimal(1)
+
+        // USED FOR RESETTING OLD FILES
+        if (player.in.delay.gt(0)) {
+            player.in.delay = player.in.delay.sub(delta)
+            if (player.in.delay.gt(0) && player.in.delay.lte(1)) {
+                layers.in.bigCrunch()
+                layers.ta.negativeInfinityReset()
+                for (let i = 0; i < player.r.milestones.length; i++) {
+                    if (+player.r.milestones[i] > 20) {
+                        player.r.milestones.splice(i, 1);
+                        i--;
+                    }
+                }
+                player.in.delay = new Decimal(0)
+            }
+        }
+
+        // MAKE TAB WORK
         if (player.subtabs["in"]['stuff'] == 'Portal') {
             player.po.lastUniverse = 'in'
             player.tab = "po"
             player.subtabs["in"]['stuff'] = 'Features'
         }
+        if (player.subtabs["in"]['stuff'] == 'Settings') {
+            player.po.lastUniverse = 'in'
+            player.tab = "settings"
+            player.subtabs["in"]['stuff'] = 'Features'
+        }
 
+        // UNI 2 UNLOCK VARIABLE
         if (player.in.infinityPoints.gt(0)) {
             player.in.unlockedInfinity = true
         }
 
-        if (player.in.reachedInfinity && !inChallenge("ip", 18)) {
+        // REACH INFINITY CODE (1e308 POINTS ROUGHLY)
+        if (player.in.reachedInfinity) {
             if (!player.in.breakInfinity) {
+                if (inChallenge("ip", 11) && !hasChallenge("ip", 11)) {
+                    player.ip.challenges[11] = 1
+                    completeChallenge("ip", 11)
+                }
+                if (inChallenge("ip", 12) && !hasChallenge("ip", 12)) {
+                    player.ip.challenges[12] = 1
+                    completeChallenge("ip", 12)
+                }
+                if (inChallenge("ip", 13) && !hasChallenge("ip", 13)) {
+                    player.ip.challenges[13] = 1
+                    completeChallenge("ip", 13)
+                }
+                if (inChallenge("ip", 14) && !hasChallenge("ip", 14)) {
+                    player.ip.challenges[14] = 1
+                    completeChallenge("ip", 14)
+                }
+                if (inChallenge("ip", 15) && !hasChallenge("ip", 15)) {
+                    player.ip.challenges[15] = 1
+                    completeChallenge("ip", 15)
+                }
+                if (inChallenge("ip", 16) && !hasChallenge("ip", 16)) {
+                    player.ip.challenges[16] = 1
+                    completeChallenge("ip", 16)
+                }
+                if (inChallenge("ip", 18) && !hasChallenge("ip", 18)) {
+                    player.ip.challenges[18] = 1
+                    completeChallenge("ip", 18)
+                }
                 if (inChallenge("tad", 11)) {
                     if (player.bi.brokenInfinities.gt(player.tad.shatteredInfinitiesToGet) && player.po.hex && !player.po.dice && !player.po.rocketFuel && inChallenge("tad", 11) && player.tad.currentConversion.eq(0)) {
                         player.tad.shatteredInfinities = player.tad.shatteredInfinities.add(player.tad.shatteredInfinitiesToGet)
@@ -61,19 +111,21 @@ addLayer("in", {
                         player.bi.brokenInfinities = player.bi.brokenInfinities.sub(player.tad.corruptedInfinitiesToGet)
                     }
                 }
-                if (!hasMilestone("ip", 21) && ((!player.s.highestSingularityPoints.gt(0)) || player.points.gte(1e308)))
-                {
+                if (!hasMilestone("ip", 21) && ((!player.s.highestSingularityPoints.gt(0)))) {
                     player.tab = "bigc"
-                } else if (hasMilestone("ip", 21)) {
+                } else {
                     layers.bigc.crunch()
                 }
             }
         }
 
+        //----------------------------------------
+
+        // START OF INFINITY POINT MODIFIERS
         if (!player.in.breakInfinity) player.in.infinityPointsToGet = new Decimal(1)
         if (player.in.breakInfinity && !hasUpgrade("bi", 111)) player.in.infinityPointsToGet = player.points.div(1e308).plus(1).log10().div(10)
         if (player.in.breakInfinity && hasUpgrade("bi", 111)) player.in.infinityPointsToGet = player.points.div(1e308).plus(1).log10().div(2).pow(1.25)
-        if (player.in.breakInfinity && hasUpgrade("i", 31)) player.in.infinityPointsToGet = player.points.div(1e308).plus(1).log10().pow(1.5)
+        if (player.in.breakInfinity && hasUpgrade("bi", 114)) player.in.infinityPointsToGet = player.points.div(1e308).plus(1).log10().pow(1.5)
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(buyableEffect("h", 21))
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(buyableEffect("h", 22))
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(buyableEffect("ip", 11))
@@ -100,18 +152,30 @@ addLayer("in", {
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(buyableEffect("h", 23))
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.rm.realmModsEffect[5])
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(buyableEffect("ca", 24))
-        player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.cb.epicPetEffects[2][1])
+        player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(levelableEffect("pet", 403)[1])
         if (hasMilestone("fa", 11)) player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.fa.milestoneEffect[0])
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.sd.singularityPowerEffect)
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(buyableEffect("s", 12))
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(buyableEffect("fu", 17))
         player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.fu.sadnessEffect2)
+        if (player.cop.processedCoreFuel.eq(10)) player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.cop.processedCoreInnateEffects[0])
+        player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.le.punchcardsPassiveEffect[0])
+        player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(levelableEffect("pet", 404)[0])
+        if (hasMilestone("r", 21)) player.in.infinityPointsToGet = player.in.infinityPointsToGet.mul(player.r.pentMilestone11Effect)
 
+        // POWER MODIFIERS
+        if (player.cop.processedCoreFuel.eq(10)) player.in.infinityPointsToGet = player.in.infinityPointsToGet.pow(player.cop.processedCoreInnateEffects[1])
+
+        //----------------------------------------
+
+        // START OF INFINITIES MODIFIERS
         player.in.infinitiesToGet = new Decimal(1)
         player.in.infinitiesToGet = player.in.infinitiesToGet.mul(buyableEffect("bi", 11))
         player.in.infinitiesToGet = player.in.infinitiesToGet.mul(buyableEffect("tad", 11))
         player.in.infinitiesToGet = player.in.infinitiesToGet.mul(buyableEffect("om", 11))
         player.in.infinitiesToGet = player.in.infinitiesToGet.mul(buyableEffect("p", 15))
+        player.in.infinitiesToGet = player.in.infinitiesToGet.mul(levelableEffect("pet", 1101)[0])
+        if (player.cop.processedCoreFuel.eq(10)) player.in.infinitiesToGet = player.in.infinitiesToGet.mul(player.cop.processedCoreInnateEffects[2])
     },
     bigCrunch() {
         if (hasUpgrade("ta", 17))
@@ -129,37 +193,15 @@ addLayer("in", {
                     if (player.po.hex) player.ta.highestHex1Points = player.h.hexPoints[0]
                 }
             }
-        if (inChallenge("ip", 11) && !hasChallenge("ip", 11) && player.points.gt(1e300)) {
-            completeChallenge("ip", 11)
-        }
-        if (inChallenge("ip", 12) && !hasChallenge("ip", 12) && player.points.gt(1e300)) {
-            completeChallenge("ip", 12)
-        }
-        if (inChallenge("ip", 13) && !hasChallenge("ip", 13) && player.points.gt(1e300)) {
-            completeChallenge("ip", 13)
-        }
-        if (inChallenge("ip", 14) && !hasChallenge("ip", 14) && player.points.gt(1e300)) {
-            completeChallenge("ip", 14)
-        }
-        if (inChallenge("ip", 15) && !hasChallenge("ip", 15) && player.points.gt(1e300)) {
-            completeChallenge("ip", 15)
-        }
-        if (inChallenge("ip", 16) && !hasChallenge("ip", 16) && player.points.gt(1e300)) {
-            completeChallenge("ip", 16)
-        }
-        if (inChallenge("ip", 18) && !hasChallenge("ip", 18) && player.points.gt(1e300)) {
-            completeChallenge("ip", 18)
-        }
         player.points = new Decimal(10)
         player.r.rank = new Decimal(0)
         player.r.tier = new Decimal(0)
-        player.r.tetr = new Decimal(0)
+        if (hasMilestone("ip", 15) && !inChallenge("ip", 14)) {player.r.tetr = new Decimal(10)} else {player.r.tetr = new Decimal(0)}
         player.r.ranksToGet = new Decimal(0)
         player.r.tiersToGet = new Decimal(0)
         player.r.tetrsToGet = new Decimal(0)
         player.r.pentToGet = new Decimal(0)
-        if (!hasUpgrade("s", 15)) player.r.pent = new Decimal(0)
-        if (hasUpgrade("s", 15)) player.r.pent = new Decimal(30)
+        player.r.pent = new Decimal(0)
 
         player.f.factorUnlocks = [true, true, true, false, false, false, false, false]
         player.f.factorGain = new Decimal(1)
@@ -204,15 +246,14 @@ addLayer("in", {
 
         player.p.prestigePoints = new Decimal(0)
 
-        if (!hasMilestone("ip", 11) && !inChallenge("ip", 14))
-        {
-        for (let i = 0; i < player.p.upgrades.length; i++) {
-            if (+player.p.upgrades[i] < 24) {
-                player.p.upgrades.splice(i, 1);
-                i--;
+        if (!hasMilestone("ip", 11) && !inChallenge("ip", 14)) {
+            for (let i = 0; i < player.p.upgrades.length; i++) {
+                if (+player.p.upgrades[i] < 24) {
+                    player.p.upgrades.splice(i, 1);
+                    i--;
+                }
             }
         }
-    }
 
         player.t.buyables[11] = new Decimal(0)
         player.t.buyables[12] = new Decimal(0)
@@ -279,8 +320,6 @@ addLayer("in", {
         player.gh.buyables[17] = new Decimal(0)
         player.gh.buyables[18] = new Decimal(0)
         player.gh.buyables[19] = new Decimal(0)
-        player.gh.buyables[21] = new Decimal(0)
-        player.gh.buyables[22] = new Decimal(0)
 
         player.m.codeExperience = new Decimal(0)
         player.m.linesOfCode = new Decimal(0)
@@ -342,6 +381,7 @@ addLayer("in", {
             player.po.hex = false
             player.po.breakInfinity = false
             player.po.realmMods = false
+            player.po.gem = false
             player.po.featureSlots = player.po.featureSlotsMax
         }
 
@@ -366,6 +406,7 @@ addLayer("in", {
 
         //challenge stuff
         player.pe.pests = new Decimal(0)
+        player.pe.pestEffect = [new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(0)]
 
         if (!inChallenge("ip", 15))
         {
@@ -393,6 +434,8 @@ addLayer("in", {
         }
 
         player.de.antidebuffPoints = new Decimal(0)
+        player.de.antidebuffEffect = new Decimal(1)
+        player.de.antidebuffPointsEffect = new Decimal(1)
         player.fa.charge = new Decimal(0)
 
     },
@@ -426,7 +469,7 @@ addLayer("in", {
         },
         2: {
             title: "Celestial",
-            body() { return "It is safe to condlude the following information about a celestial: Celestials are comprised of a physical aspect, and a superphysical aspect. Both aspects contain immense powers that are incomprehensible by normal life forms. Most of us were once a different life form, humans included. It is unknown what causes us to be celestials. It can be very hard for us to travel between universes, only the most skilled of celestials can. Many unknowns are still present. We don't know who rules the celestials. We don't know why celestials exist. We don't know what our true limits are. It is only a matter of time until I figure everything out." },
+            body() { return "It is safe to conclude the following information about a celestial: Celestials are comprised of a physical aspect, and a superphysical aspect. Both aspects contain immense powers that are incomprehensible by normal life forms. Most of us were once a different life form, humans included. It is unknown what causes us to be celestials. It can be very hard for us to travel between universes, only the most skilled of celestials can. Many unknowns are still present. We don't know who rules the celestials. We don't know why celestials exist. We don't know what our true limits are. It is only a matter of time until I figure everything out." },
             unlocked() { return hasUpgrade("bi", 18) },      
         },
         3: {
@@ -438,43 +481,40 @@ addLayer("in", {
     microtabs: {
         stuff: {
             "Features": {
-                buttonStyle() { return { 'color': 'white' } },
+                buttonStyle() { return { color: "white", borderRadius: "5px" } },
                 unlocked() { return true },
-                content:
-                [
-                        ["blank", "25px"],
-                        ["tree", tree2],
+                content: [
+                    ["blank", "25px"],
+                    ["tree", tree2],
                 ]
-
             },
             "Lore": {
-                buttonStyle() { return { 'color': 'white' } },
+                buttonStyle() { return { color: "white", borderRadius: "5px" } },
                 unlocked() { return true },
-                content:
-                [
+                content: [
                         ["blank", "25px"],
                         ["infobox", "1"],
                         ["infobox", "2"],
                         ["infobox", "3"],
                 ]
-
             },
             "Portal": {
-                buttonStyle() { return { 'color': 'black', 'border-color': 'purple', background: 'linear-gradient(45deg, #8a00a9, #0061ff)', } },
-                unlocked() { return hasUpgrade("ad", 13) || player.s.highestSingularityPoints.gte(0) },
-                content:
-                [
-                ]
+                buttonStyle() { return { color: "black", borderRadius: "5px", borderColor: "purple", background: "linear-gradient(45deg, #8a00a9, #0061ff)" }},
+                unlocked() { return true },
+                content: []
             },
-            "Settings": settingsMicrotab,
+            "Settings": {
+                buttonStyle() { return { color: "white", borderRadius: "5px" }},
+                unlocked() { return true },
+                content: [],
+            },
         },
     },
-
     tabFormat: [
-                        ["raw-html", function () { return "You have <h3>" + format(player.ad.antimatter) + "</h3> antimatter, which boosts points by x" + format(player.ad.antimatterEffect) + " (based on points and antimatter)" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
-         ["raw-html", function () { return "You are gaining <h3>" + format(player.ad.antimatterPerSecond) + "</h3> antimatter per second." }, { "color": "white", "font-size": "16px", "font-family": "monospace" }],
-                        ["microtabs", "stuff", { 'border-width': '0px' }],
-        ],
+        ["raw-html", function () { return "You have <h3>" + format(player.ad.antimatter) + "</h3> antimatter, which boosts points by x" + format(player.ad.antimatterEffect) + " (based on points and antimatter)" }, { "color": "white", "font-size": "24px", "font-family": "monospace" }],
+        ["raw-html", function () { return "You are gaining <h3>" + format(player.ad.antimatterPerSecond) + "</h3> antimatter per second." }, { "color": "white", "font-size": "16px", "font-family": "monospace" }],
+        ["microtabs", "stuff", { 'border-width': '0px' }],
+    ],
     layerShown() { return player.startedGame == true && player.in.unlockedInfinity}
 })
 addLayer("bigc", {
@@ -485,13 +525,10 @@ addLayer("bigc", {
     startData() { return {
         unlocked: true,
         spawnedWisps: false,
-    }
-    },
-    automate() {
-    },
-    nodeStyle() {
-    },
-    tooltip: "Ranks",
+    }},
+    automate() {},
+    nodeStyle() {},
+    tooltip: "Big Crunch",
     color: "white",
     update(delta) {
         let onepersec = new Decimal(1)
@@ -521,7 +558,6 @@ addLayer("bigc", {
             },
             style: { width: '300px', "min-height": '120px' },
         },
-
     },
     crunch(){
         player.in.infinityPoints = player.in.infinityPoints.add(player.in.infinityPointsToGet)
@@ -538,6 +574,17 @@ addLayer("bigc", {
         {
             player.ip.hexRuns = player.ip.hexRuns.add(1)
         }
+        if (hasUpgrade("ta", 17)) {
+            if (player.d.dicePoints.gt(player.ta.highestDicePoints)) {
+                player.ta.highestDicePoints = player.d.dicePoints
+            }
+            if (player.rf.rocketFuel.gt(player.ta.highestRocketFuel)) {
+                player.ta.highestRocketFuel = player.rf.rocketFuel
+            }
+            if (player.h.hexPoints[0].gt(player.ta.highestHex1Points)) {
+                if (player.po.hex) player.ta.highestHex1Points = player.h.hexPoints[0]
+            }
+        }
         layers.in.bigCrunch()
         player.in.reachedInfinity = false
 
@@ -548,24 +595,16 @@ addLayer("bigc", {
 
         player.rm.halterBoostCheck = true
     },
-    bars: {
-    },
-    upgrades: {
-    },
-    buyables: {
-    },
-    milestones: {
-
-    },
-    challenges: {
-    },
-    infoboxes: {
-    },
-
+    bars: {},
+    upgrades: {},
+    buyables: {},
+    milestones: {},
+    challenges: {},
+    infoboxes: {},
     tabFormat: [
-                    ["raw-html", function () { return "<h2>1e308 celestial points- impossible." }, { "color": "black", "font-size": "16px", "font-family": "monospace" }],
-                    ["blank", "150px"],
-                    ["row", [["clickable", 11]]],
+        ["raw-html", function () { return "<h2>1e308 celestial points- impossible." }, { "color": "black", "font-size": "16px", "font-family": "monospace" }],
+        ["blank", "150px"],
+        ["row", [["clickable", 11]]],
     ],
     layerShown() { return player.startedGame == true }
 })

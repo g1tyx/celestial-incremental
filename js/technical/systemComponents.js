@@ -65,7 +65,7 @@ var systemComponents = {
 	'layer-tab': {
 		props: ['layer', 'back', 'spacing', 'embedded'],
 		template: `<div v-bind:style="[tmp[layer].style ? tmp[layer].style : {}, (tmp[layer].tabFormat && !Array.isArray(tmp[layer].tabFormat)) ? tmp[layer].tabFormat[player.subtabs[layer].mainTabs].style : {},
-				options.newMenu==true && options.menuShown==true && player.startedGame && player.tab!='c' && player.tab!='bigc' && player.tab!='revc' ? {'margin-left':'250px'}:{'margin-left':'0px'}]" class="noBackground">
+				options.newMenu==true && options.menuShown==true && player.startedGame && player.tab!='c' && player.tab!='bigc' && player.tab!='revc' && !embedded ? {'margin-left':'250px'}:{'margin-left':'0px'}]" class="noBackground">
 		<div v-if="!tmp[layer].tabFormat">
 			<div v-if="spacing" v-bind:style="{'height': spacing}" :key="this.$vnode.key + '-spacing'"></div>
 			<infobox v-if="tmp[layer].infoboxes" :layer="layer" :data="Object.keys(tmp[layer].infoboxes)[0]":key="this.$vnode.key + '-info'"></infobox>
@@ -116,7 +116,7 @@ var systemComponents = {
             Made by {{modInfo.author}}
         </span>
         <br>
-        The Modding Tree <a v-bind:href="'https://github.com/Acamaeda/The-Modding-Tree/blob/master/changelog.md'" target="_blank" class="link" v-bind:style = "{'font-size': '14px', 'display': 'inline'}" >{{TMT_VERSION.tmtNum}}</a> by Acamaeda
+        The Modding Tree <a v-bind:href="'https://github.com/Acamaeda/The-Modding-Tree/blob/master/changelog.md'" target="_blank" class="link" v-bind:style = "{'font-size': '14px', 'display': 'inline'}" >{{TMT_VERSION.tmtNum}}</a> by Acamaeda and FlamemasterNXF
         <br>
         Songs made by Sweetlolipop (My brother) <br>
         The Prestige Tree made by Jacorb and Aarex<br>
@@ -166,6 +166,9 @@ var systemComponents = {
 				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">Shift-Click to Toggle Tooltips: {{ options.forceTooltips?"ON":"OFF" }}</button></td>
 				</tr>
             <tr>
+			<tr>
+                <td><button class="opt" onclick="toggleOpt('hideMilestonePopups')">Show Milestone Popups: {{ formatOption(!options.hideMilestonePopups) }}</button></td>
+            </tr>
 			<td><button class="opt" onclick="toggleOpt('musicToggle'); needsCanvasUpdate = true">Toggle Music: {{ options.musicToggle?"Unmute":"Mute" }}</button></td>
 				<td><button class="opt" onclick="toggleOpt('toggleHotkey'); needsCanvasUpdate = true">Toggle Hotkeys: {{ options.toggleHotkey?"On":"Off" }}</button></td>
 				<td><button class="opt" onclick="toggleOpt('toggleParticle'); needsCanvasUpdate = true">Toggle Particles: {{ options.toggleParticle?"On":"Off" }}</button></td>
@@ -200,7 +203,7 @@ var systemComponents = {
 	'particle': {
 		props: ['data', 'index'],
 		template: `<div><div class='particle instant' v-bind:style="[constructParticleStyle(data), data.style]"
-			v-on:click="run(data.onClick, data)"  v-on:mouseenter="run(data.onMouseOver, data)" v-on:mouseleave="run(data.onMouseLeave, data)" ><span v-html="data.text"></span>
+			v-on:click="run(data.onClick, data)"  v-on:mouseenter="run(data.onMouseEnter, data)" v-on:mouseleave="run(data.onMouseLeave, data)" ><span v-html="data.text"></span>
 		</div>
 		<svg version="2" v-if="data.color">
 		<mask v-bind:id="'pmask' + data.id">

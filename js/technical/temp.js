@@ -11,7 +11,8 @@ var activeFunctions = [
 	"effectDescription", "display", "fullDisplay", "effectDisplay", "rewardDisplay",
 	"tabFormat", "content",
 	"onComplete", "onPurchase", "onEnter", "onExit", "done",
-	"getUnlocked", "getStyle", "getCanClick", "getTitle", "getDisplay"
+	"getUnlocked", "getStyle", "getCanClick", "getTitle", "getDisplay", "pointClick",
+	"evoClick"
 ]
 
 var noCall = doNotCallTheseFunctionsEveryTick
@@ -41,6 +42,7 @@ function setupTemp() {
 		tmp[layer].prestigeNotify = {}
 		tmp[layer].computedNodeStyle = []
 		setupBuyables(layer)
+		setupLevelables(layer)
 		tmp[layer].trueGlowColor = []
 	}
 
@@ -96,7 +98,7 @@ function updateTemp() {
 	if (tmp === undefined)
 		setupTemp()
 
-	updateTempData(layers, tmp, funcs)
+	updateTempData(layers, tmp, funcs, undefined, true)
 
 	for (layer in layers){
 		tmp[layer].resetGain = getResetGain(layer)
@@ -121,8 +123,17 @@ function updateTemp() {
 	}
 }
 
-function updateTempData(layerData, tmpData, funcsData, useThis) {
+function updateTempData(layerData, tmpData, funcsData, useThis, firstStep = false) {
 	for (item in funcsData){
+		if (firstStep) {
+			if (layers[item].deactivated) {
+				if (layers[item].deactivated()) {
+					tmp[item].deactivated = true
+					tmp[item].layerShown = layers[item].layerShown()
+					continue
+				}
+			}
+		}
 		if (Array.isArray(layerData[item])) {
 			if (item !== "tabFormat" && item !== "content") // These are only updated when needed
 				updateTempData(layerData[item], tmpData[item], funcsData[item], useThis)
@@ -140,19 +151,20 @@ function updateTempData(layerData, tmpData, funcsData, useThis) {
 	}	
 }
 
-function updateChallengeTemp(layer)
-{
+function updateChallengeTemp(layer) {
 	updateTempData(layers[layer].challenges, tmp[layer].challenges, funcs[layer].challenges)
 }
 
 
-function updateBuyableTemp(layer)
-{
+function updateBuyableTemp(layer) {
 	updateTempData(layers[layer].buyables, tmp[layer].buyables, funcs[layer].buyables)
 }
 
-function updateClickableTemp(layer)
-{
+function updateLevelableTemp(layer) {
+	updateTempData(layers[layer].levelables, tmp[layer].levelables, funcs[layer].levelables)
+}
+
+function updateClickableTemp(layer) {
 	updateTempData(layers[layer].clickables, tmp[layer].clickables, funcs[layer].clickables)
 }
 
@@ -169,6 +181,19 @@ function setupBuyables(layer) {
 			b.effect = function(x) {
 				x = (x === undefined ? player[this.layer].buyables[this.id] : x)
 				return layers[this.layer].buyables[this.id].actualEffectFunction(x)
+			}
+		}
+	}
+}
+
+function setupLevelables(layer) {
+	for (id in layers[layer].levelables) {
+		if (isPlainObject(layers[layer].levelables[id])) {
+			let l = layers[layer].levelables[id]
+			l.actualEffectFunction = l.effect
+			l.effect = function(x) {
+				x = (x === undefined ? player[this.layer].levelables[this.id][0] : x)
+				return layers[this.layer].levelables[this.id].actualEffectFunction(x)
 			}
 		}
 	}

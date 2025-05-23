@@ -25,7 +25,10 @@ function canBuyBuyable(layer, id) {
 	return (b.unlocked && run(b.canAfford, b) && player[layer].buyables[id].lt(b.purchaseLimit) && !tmp[layer].deactivated)
 }
 
-
+function canBuyLevelable(layer, id) {
+	let l = temp[layer].levelables[id]
+	return (l.unlocked && run(l.canAfford, l) && player[layer].levelables[id][0].lt(l.levelLimit) && !tmp[layer].deactivated)
+}
 
 function canAffordPurchase(layer, thing, cost) {
 	if (thing.currencyInternalName) {
@@ -91,7 +94,7 @@ function buyUpg(layer, id) {
 }
 
 function buyMaxBuyable(layer, id) {
-	if (!player[layer].unlocked) return
+	if (!player[layer].unlocked || tmp[layer].deactivated) return
 	if (!tmp[layer].buyables[id].unlocked) return
 	if (!tmp[layer].buyables[id].canBuy) return
 	if (!layers[layer].buyables[id].buyMax) return
@@ -101,12 +104,39 @@ function buyMaxBuyable(layer, id) {
 }
 
 function buyBuyable(layer, id) {
-	if (!player[layer].unlocked) return
+	if (!player[layer].unlocked || tmp[layer].deactivated) return
 	if (!tmp[layer].buyables[id].unlocked) return
 	if (!tmp[layer].buyables[id].canBuy) return
 
 	run(layers[layer].buyables[id].buy, layers[layer].buyables[id])
 	updateBuyableTemp(layer)
+}
+
+function buyMaxExBuyable(layer, id) {
+	if (!player[layer].unlocked || tmp[layer].deactivated) return
+	if (!tmp[layer].buyables[id].unlocked) return
+	if (!tmp[layer].buyables[id].canBuy) return
+
+	run(layers[layer].buyables[id].buy(true), layers[layer].buyables[id])
+	updateBuyableTemp(layer)
+}
+
+function buyLevelable(layer, id) {
+	if (!player[layer].unlocked || tmp[layer].deactivated) return
+	if (!tmp[layer].levelables[id].unlocked) return
+	if (!tmp[layer].levelables[id].canBuy) return
+
+	run(layers[layer].levelables[id].buy, layers[layer].levelables[id])
+	updateLevelableTemp(layer)
+}
+
+function clickLevelable(layer, id) {
+	if (!player[layer].unlocked || tmp[layer].deactivated) return
+	if (!tmp[layer].levelables[id].unlocked) return
+	if (!tmp[layer].levelables[id].canClick) return
+
+	run(layers[layer].levelables[id].onClick, layers[layer].levelables[id])
+	updateLevelableTemp(layer)
 }
 
 function clickClickable(layer, id) {
@@ -261,7 +291,7 @@ function updateMilestones(layer) {
 		if (!(hasMilestone(layer, id)) && layers[layer].milestones[id].done()) {
 			player[layer].milestones.push(id)
 			if (layers[layer].milestones[id].onComplete) layers[layer].milestones[id].onComplete()
-			if (tmp[layer].milestonePopups || tmp[layer].milestonePopups === undefined) doPopup("milestone", tmp[layer].milestones[id].requirementDescription, "Milestone Gotten!", 3, tmp[layer].color);
+			if ((tmp[layer].milestonePopups || tmp[layer].milestonePopups === undefined) && !options.hideMilestonePopups) doPopup("milestone", tmp[layer].milestones[id].requirementDescription, "Milestone Gotten!", 3, tmp[layer].color);
 			player[layer].lastMilestone = id
 		}
 	}

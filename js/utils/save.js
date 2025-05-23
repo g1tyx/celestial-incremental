@@ -74,10 +74,12 @@ function getStartLayerData(layer) {
 		layerdata.forceTooltip = false;
 
 	layerdata.buyables = getStartBuyables(layer);
+	layerdata.levelables = getStartLevelables(layer);
 	if (layerdata.noRespecConfirm === undefined) layerdata.noRespecConfirm = false
 	if (layerdata.clickables == undefined)
 		layerdata.clickables = getStartClickables(layer);
 	layerdata.spentOnBuyables = decimalZero;
+	layerdata.spentOnLevelables = decimalZero;
 	layerdata.upgrades = [];
 	layerdata.milestones = [];
 	layerdata.lastMilestone = null;
@@ -94,6 +96,15 @@ function getStartBuyables(layer) {
 		for (id in layers[layer].buyables)
 			if (isPlainObject(layers[layer].buyables[id]))
 				data[id] = decimalZero;
+	}
+	return data;
+}
+function getStartLevelables(layer) {
+	let data = {};
+	if (layers[layer].levelables) {
+		for (id in layers[layer].levelables)
+			if (isPlainObject(layers[layer].levelables[id]))
+				data[id] = [decimalZero, decimalZero];
 	}
 	return data;
 }
@@ -262,7 +273,7 @@ function exportSave() {
 	el.value = str;
 	document.body.appendChild(el);
 	el.select();
-	el.setSelectionRange(0, 99999);
+	el.setSelectionRange(0, 9999999);
 	document.execCommand("copy");
 	document.body.removeChild(el);
 }
