@@ -43,7 +43,7 @@ function addBuyables(layer, id, amt) {
 }
 
 function getLevelableAmount(layer, id) {
-	return (player[layer].levelables[id][0])
+	return new Decimal(player[layer].levelables[id][0])
 }
 
 function setLevelableAmount(layer, id, amt) {
@@ -55,7 +55,7 @@ function addLevelables(layer, id, amt) {
 }
 
 function getLevelableXP(layer, id) {
-	return (player[layer].levelables[id][1])
+	return new Decimal(player[layer].levelables[id][1])
 }
 
 function setLevelableXP(layer, id, amt) {
@@ -64,6 +64,14 @@ function setLevelableXP(layer, id, amt) {
 
 function addLevelableXP(layer, id, amt) {
 	player[layer].levelables[id][1] = player[layer].levelables[id][1].add(amt)
+}
+
+function getLevelableBool(layer, id) {
+	return (player[layer].levelables[id][2])
+}
+
+function setLevelableBool(layer, id, val) {
+	player[layer].levelables[id][2] = val
 }
 
 function getClickableState(layer, id) {
